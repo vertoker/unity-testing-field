@@ -128,6 +128,10 @@ namespace CollisionDetection2D
         }
         public static bool CirclePolygon(num cx, num cy, num cr, Point[] vertices)
         {
+            bool inPolygon = PointPolygon(cx, cy, vertices);
+            if (inPolygon)
+                return true;
+
             int next;
             for (int current = 0; current < vertices.Length; current++)
             {
@@ -138,10 +142,10 @@ namespace CollisionDetection2D
                 Point vc = vertices[current];
                 Point vn = vertices[next];
 
-                if (CircleLine(cx, cy, cr, vc.x, vc.y, vn.x, vn.y) || PointPolygon(cx, cy, vertices))
+                if (CircleLine(cx, cy, cr, vc.x, vc.y, vn.x, vn.y))
                     return true;
             }
-            return false;
+            return inPolygon;
         }
         public static bool CircleTriangle(num cx, num cy, num cr, num x1, num y1, num x2, num y2, num x3, num y3)
         {
@@ -194,6 +198,10 @@ namespace CollisionDetection2D
         }
         public static bool RectanglePolygon(num rx, num ry, num rw, num rh, Point[] vertices)
         {
+            bool inPolygon = PointPolygon(rx, ry, vertices);
+            if (inPolygon)
+                return true;
+
             int next;
             for (int current = 0; current < vertices.Length; current++)
             {
@@ -204,10 +212,10 @@ namespace CollisionDetection2D
                 Point vc = vertices[current];
                 Point vn = vertices[next];
 
-                if (RectangleLine(rx, ry, rw, rh, vc.x, vc.y, vn.x, vn.y) || PointPolygon(rx, ry, vertices))
+                if (RectangleLine(rx, ry, rw, rh, vc.x, vc.y, vn.x, vn.y))
                     return true;
             }
-            return false;
+            return inPolygon;
         }
         public static bool RectangleTriangle(num rx, num ry, num rw, num rh, num x1, num y1, num x2, num y2, num x3, num y3)
         {
@@ -237,6 +245,10 @@ namespace CollisionDetection2D
         }
         public static bool LinePolygon(num x1, num y1, num x2, num y2, Point[] vertices)
         {
+            bool inPolygon = PointPolygon(x1, y1, vertices) || PointPolygon(x2, y2, vertices);
+            if (inPolygon)
+                return true;
+
             int next;
             for (int current = 0; current < vertices.Length; current++)
             {
@@ -247,7 +259,7 @@ namespace CollisionDetection2D
                 if (LineLine(x1, y1, x2, y2, vertices[current].x, vertices[current].y, vertices[next].x, vertices[next].y))
                     return true;
             }
-            return false;
+            return inPolygon;
         }
         public static bool LineTriangle(num x1, num y1, num x2, num y2, num x3, num y3, num x4, num y4, num x5, num y5)
         {
@@ -262,6 +274,10 @@ namespace CollisionDetection2D
         #region Polygon
         public static bool PolygonPolygon(Point[] vertices1, Point[] vertices2)
         {
+            bool inPolygon = PointPolygon(vertices2[0].x, vertices2[0].y, vertices1);
+            if (inPolygon)
+                return true;
+
             int next;
             for (int current = 0; current < vertices1.Length; current++)
             {
@@ -272,13 +288,17 @@ namespace CollisionDetection2D
                 Point vc = vertices1[current];
                 Point vn = vertices1[next];
 
-                if (LinePolygon(vc.x, vc.y, vn.x, vn.y, vertices2) || PointPolygon(vertices2[0].x, vertices2[0].y, vertices1))
+                if (LinePolygon(vc.x, vc.y, vn.x, vn.y, vertices2))
                     return true;
             }
-            return false;
+            return inPolygon;
         }
         public static bool PolygonTriangle(Point[] vertices, num x1, num y1, num x2, num y2, num x3, num y3)
         {
+            bool inPolygon = PointTriangle(x1, y1, vertices) || PointTriangle(x2, y2, vertices) || PointTriangle(x3, y3, vertices);
+            if (inPolygon)
+                return true;
+
             int next;
             for (int current = 0; current < vertices.Length; current++)
             {
@@ -299,12 +319,33 @@ namespace CollisionDetection2D
         #region Triangle
         public static bool TriangleTriangle(num x1, num y1, num x2, num y2, num x3, num y3, num x4, num y4, num x5, num y5, num x6, num y6)
         {
-            return PointTriangle(x4, y4, x1, y1, x2, y2, x3, y3) ||
-                PointTriangle(x5, y5, x1, y1, x2, y2, x3, y3) ||
-                PointTriangle(x6, y6, x1, y1, x2, y2, x3, y3) ||
-                PointTriangle(x1, y1, x4, y4, x5, y5, x6, y6) ||
-                PointTriangle(x2, y2, x4, y4, x5, y5, x6, y6) ||
-                PointTriangle(x3, y3, x4, y4, x5, y5, x6, y6);
+            static bool PointTriangle(num px, num py, num x1, num y1, num x2, num y2, num x3, num y3, num areaOrig)
+            {
+                num area1 = Abs((x1 - px) * (y2 - py) - (x2 - px) * (y1 - py));
+                num area2 = Abs((x2 - px) * (y3 - py) - (x3 - px) * (y2 - py));
+                num area3 = Abs((x3 - px) * (y1 - py) - (x1 - px) * (y3 - py));
+                return area1 + area2 + area3 == areaOrig;
+            }
+
+            num areaOrig1 = Abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1));
+            if (PointTriangle(x4, y4, x1, y1, x2, y2, x3, y3, areaOrig1) ||
+                PointTriangle(x5, y5, x1, y1, x2, y2, x3, y3, areaOrig1) ||
+                PointTriangle(x6, y6, x1, y1, x2, y2, x3, y3, areaOrig1))
+                return true;
+
+            num areaOrig2 = Abs((x5 - x4) * (y6 - y4) - (x6 - x4) * (y5 - y4));
+            return PointTriangle(x1, y1, x4, y4, x5, y5, x6, y6, areaOrig2) ||
+                PointTriangle(x2, y2, x4, y4, x5, y5, x6, y6, areaOrig2) ||
+                PointTriangle(x3, y3, x4, y4, x5, y5, x6, y6, areaOrig2) ||
+                LineLine(x1, y1, x2, y2, x4, y4, x5, y5) ||
+                LineLine(x1, y1, x2, y2, x4, y4, x6, y6) ||
+                LineLine(x1, y1, x2, y2, x5, y5, x6, y6) ||
+                LineLine(x1, y1, x3, y3, x4, y4, x5, y5) ||
+                LineLine(x1, y1, x3, y3, x4, y4, x6, y6) ||
+                LineLine(x1, y1, x3, y3, x5, y5, x6, y6) ||
+                LineLine(x2, y2, x3, y3, x4, y4, x5, y5) ||
+                LineLine(x2, y2, x3, y3, x4, y4, x6, y6) ||
+                LineLine(x2, y2, x3, y3, x5, y5, x6, y6);
         }
         #endregion
     }
