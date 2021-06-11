@@ -5,7 +5,7 @@ namespace CollisionDetection2D
         public Point[] vertices;
         public bool CollisionDetection(ICollision collision)
         {
-            return CollisionDetectionPolygon(this);
+            return collision.CollisionDetectionPolygon(this);
         }
         public bool CollisionDetectionPoint(Point point)
         {

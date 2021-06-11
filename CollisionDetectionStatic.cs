@@ -10,7 +10,6 @@ namespace CollisionDetection2D
         {
             if (x <= 0)
                 return 0;
-
             num root = x / 3;
             for (int i = 0; i < 32; i++)
                 root = (root + x / root) / 2;
@@ -81,9 +80,7 @@ namespace CollisionDetection2D
         #region Circle
         public static bool CircleCircle(num x1, num y1, num r1, num x2, num y2, num r2)
         {
-            num distX = x2 - x1, distY = y2 - y1;
-            num dist = Sqrt((distX * distX) + (distY * distY));
-            return dist <= r1 + r2;
+            return Distance(x1, y1, x2, y2) <= r1 + r2;
         }
         public static bool CircleRectangle(num cx, num cy, num cr, num rx, num ry, num rw, num rh)
         {
@@ -103,10 +100,7 @@ namespace CollisionDetection2D
             else if (cy > ymax)
                 testY = ymax;
 
-            num distX = cx - testX;
-            num distY = cy - testY;
-            num distance = Sqrt((distX * distX) + (distY * distY));
-            return distance <= cr;
+            return Distance(cx, cy, testX, testY) <= cr;
         }
         public static bool CircleLine(num cx, num cy, num cr, num lx1, num ly1, num lx2, num ly2, num buf = 0.1f)
         {

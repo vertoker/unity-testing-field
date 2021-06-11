@@ -5,7 +5,7 @@ namespace CollisionDetection2D
         public float x, y, w, h;
         public bool CollisionDetection(ICollision collision)
         {
-            return CollisionDetectionRectangle(this);
+            return collision.CollisionDetectionRectangle(this);
         }
         public bool CollisionDetectionPoint(Point point)
         {
