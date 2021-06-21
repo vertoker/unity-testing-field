@@ -254,6 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: b1d942f7ad2405f40bc33025e67adc8d, type: 2}
+  _spawnInParent: 1
+  parent: {fileID: 553420337}
 --- !u!4 &553420337
 Transform:
   m_ObjectHideFlags: 0
@@ -571,7 +573,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Click or something
+  m_Text: Click or drag
 --- !u!222 &1139394019
 CanvasRenderer:
   m_ObjectHideFlags: 0
