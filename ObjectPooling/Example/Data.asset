@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Data
   m_EditorClassIdentifier: 
   _object: {fileID: 1126547641947058276, guid: e98754d8eb1aee7418bfa491f5932196, type: 3}
-  _startCapacity: 10
+  _startCapacity: 100

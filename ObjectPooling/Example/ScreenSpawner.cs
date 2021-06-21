@@ -4,13 +4,20 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using Game.Pool;
 
-public class ScreenSpawner : MonoBehaviour, IPointerClickHandler
+public class ScreenSpawner : MonoBehaviour, IPointerClickHandler, IDragHandler
 {
-    [SerializeField] private PoolSpawner pool;
+    [SerializeField] private PoolSpawner _pool;
+    [SerializeField] private int _lifetime;
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        OnPointerClick(eventData);
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Transform transform = pool.Dequeue(15).transform;
+        Transform transform = _pool.Dequeue(_lifetime).transform;
         transform.position = eventData.pointerCurrentRaycast.worldPosition;
     }
+
 }

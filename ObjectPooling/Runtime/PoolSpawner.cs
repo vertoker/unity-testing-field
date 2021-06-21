@@ -11,6 +11,7 @@ namespace Game.Pool
 
         private void Start()
         {
+            DontDestroyOnLoad(gameObject);
             if (_data.GetObject.activeSelf)
                 _data.GetObject.SetActive(false);
             for (int i = 0; i < _data.GetCapacity; i++)
