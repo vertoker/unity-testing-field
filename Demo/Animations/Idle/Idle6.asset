@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337eaacb9175cc24da639e8f8c4a1657, type: 3}
+  m_Name: Idle6
+  m_EditorClassIdentifier: 
+  _frameArray:
+  - {fileID: 2973940874069163354, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  - {fileID: -3547867813687463170, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  - {fileID: 3838556530734163676, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  - {fileID: -1499976257121873182, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  - {fileID: 168846979551174993, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  - {fileID: 1848214276972832728, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  - {fileID: -5438464607267775908, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  - {fileID: -2162490490912676814, guid: cf8b7e71776be5a4c949bba9c9ed6d55, type: 3}
+  _realtime: 0
+  _playOnStart: 0
+  _loop: 1
+  _initSprite: 0
+  _fps: 12
