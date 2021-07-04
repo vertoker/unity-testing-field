@@ -10,14 +10,9 @@ namespace Game.SerializationSaver
     /// </summary>
     public class BinarySaver : ISaver
     {
-        private readonly BinaryFormatter _formatter;
+        private readonly static BinaryFormatter _formatter = GetFormatter();
 
-        public BinarySaver()
-        {
-            _formatter = GetFormatter();
-        }
-
-        private BinaryFormatter GetFormatter()
+        private static BinaryFormatter GetFormatter()
         {
             var formatter = new BinaryFormatter();
             var selector = new SurrogateSelector();

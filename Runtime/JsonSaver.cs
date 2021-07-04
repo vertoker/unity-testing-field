@@ -9,11 +9,6 @@ namespace Game.SerializationSaver
     /// </summary>
     public class JsonSaver : ISaver
     {
-        public JsonSaver()
-        {
-
-        }
-        
         public void Save<T>(T data, params string[] paths)
         {
             var path = SaverStatic.PathCombine(paths);

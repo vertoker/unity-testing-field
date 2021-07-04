@@ -13,11 +13,6 @@ namespace Game.SerializationSaver
         private Type _typeSerializer = null;
         private XmlSerializer _serializer;
 
-        public XMLSaver()
-        {
-
-        }
-
         public void Save<T>(T data, params string[] paths)
         {
             var path = SaverStatic.PathCombine(paths);
