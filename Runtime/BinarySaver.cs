@@ -8,11 +8,16 @@ namespace Game.SerializationSaver
     /// <summary>
     /// Use to save private data
     /// </summary>
-    public static class BinarySaver
+    public class BinarySaver : ISaver
     {
-        private static readonly BinaryFormatter _formatter = GetFormatter();
+        private readonly BinaryFormatter _formatter;
 
-        private static BinaryFormatter GetFormatter()
+        public BinarySaver()
+        {
+            _formatter = GetFormatter();
+        }
+
+        private BinaryFormatter GetFormatter()
         {
             var formatter = new BinaryFormatter();
             var selector = new SurrogateSelector();
@@ -27,19 +32,20 @@ namespace Game.SerializationSaver
             selector.AddSurrogate(typeof(Color32), context, new Color32Serializer());
             selector.AddSurrogate(typeof(Color), context, new ColorSerializer());
             selector.AddSurrogate(typeof(Quaternion), context, new QuaternionSerializer());
-            selector.AddSurrogate(typeof(Rect), context, new RectSerializer());
             selector.AddSurrogate(typeof(RectInt), context, new RectIntSerializer());
+            selector.AddSurrogate(typeof(Rect), context, new RectSerializer());
+            selector.AddSurrogate(typeof(Texture2D), context, new Texture2DSerializer());
 
             formatter.SurrogateSelector = selector;
             return formatter;
         }
 
-        public static void Save<T>(T data, params string[] paths)
+        public void Save<T>(T data, params string[] paths)
         {
             var path = SaverStatic.PathCombine(paths);
             Save(data, path);
         }
-        public static void Save<T>(T data, string path)
+        public void Save<T>(T data, string path)
         {
             var directory = Path.GetDirectoryName(path);
             if (!Directory.Exists(directory))
@@ -49,12 +55,12 @@ namespace Game.SerializationSaver
             _formatter.Serialize(stream, data);
         }
 
-        public static T Load<T>(params string[] paths)
+        public T Load<T>(params string[] paths)
         {
             var path = SaverStatic.PathCombine(paths);
             return Load<T>(path);
         }
-        public static T Load<T>(string path)
+        public T Load<T>(string path)
         {
             if (!File.Exists(path))
             {

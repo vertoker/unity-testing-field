@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930204bcf96c3814da39be6d2b9ac73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _typeLoad: 3
+  _typeLoad: 2
   _demo:
     vector2Array: []
     vector3Array: []
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f7faa6945d1604e851050343ce25f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _typeSave: 3
+  _typeSave: 2
   _demo:
     vector2Array:
     - {x: 1, y: 2}
@@ -219,6 +219,7 @@ MonoBehaviour:
     - 67
     - 78
     - 89
+  _load: {fileID: 107964135}
 --- !u!4 &933197069
 Transform:
   m_ObjectHideFlags: 0
