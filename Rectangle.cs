@@ -1,5 +1,8 @@
 namespace CollisionDetection2D
 {
+    /// <summary>
+    /// This is not Rect. x and y denote center of rectangle, not a left top corner
+    /// </summary>
     public struct Rectangle : ICollision
     {
         public float x, y, w, h;
