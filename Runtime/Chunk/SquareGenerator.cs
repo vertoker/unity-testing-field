@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 using UnityEngine;
 
-public class SquareGenerator : MonoBehaviour
+[CreateAssetMenu(fileName = "New Square Generator", menuName = "Map/Square")]
+public class SquareGenerator : Generator
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Initialize(ChunkContext context, Tilemap[] tilemaps)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
