@@ -362,7 +362,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2115707912}
   - component: {fileID: 2115707914}
+  - component: {fileID: 2115707916}
   - component: {fileID: 2115707913}
+  - component: {fileID: 2115707915}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -397,8 +399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneName: Chunk
-  _sizeX: 0
-  _sizeY: 0
 --- !u!114 &2115707914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,3 +412,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 0.5
+--- !u!114 &2115707915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115707911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc69c7df5de32e4b85eed085b11e6e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 687303930}
+--- !u!114 &2115707916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115707911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9525154c3d1013a449cf4d30b436851a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceLoad: 5
+  _sizeX: 16
+  _sizeY: 16
+  _loadManager: {fileID: 2115707913}
+  _loader: {fileID: 2115707915}

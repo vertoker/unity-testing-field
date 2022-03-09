@@ -8,6 +8,6 @@ public class SquareGenerator : Generator
 {
     public override void Initialize(ChunkContext context, Tilemap[] tilemaps)
     {
-
+        
     }
 }

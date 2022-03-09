@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace Game.WorldGeneration
 {
-    public class SceneLoadManager : MonoBehaviour
+    public class SceneLoadManager : DataInitialize
     {
         [SerializeField] private string _sceneName;
-        [SerializeField] private int _sizeX, _sizeY;
+        private IntDelegate _sizeXDelegate, _sizeYDelegate;
 
         private void OnEnable()
         {
@@ -20,18 +20,25 @@ namespace Game.WorldGeneration
             SceneManager.sceneLoaded -= LoadedScene;
             SceneManager.sceneUnloaded -= UnloadedScene;
         }
-        public void UpdateChunks()
+        public override void Initialize(IntDelegate chunksLoadCountXDelegate, IntDelegate chunksLoadCountYDelegate, IntDelegate sizeXDelegate, IntDelegate sizeYDelegate)
         {
-            Load(0, 0);
+            _sizeXDelegate = sizeXDelegate;
+            _sizeYDelegate = sizeYDelegate;
         }
 
-        private void Load(int posX, int posY)
+        public void Load(int posX, int posY)
         {
-            ChunkContext context = new ChunkContext(_sizeX, _sizeY, posX, posY);
+            ChunkContext context = new ChunkContext(_sizeXDelegate.Invoke(), _sizeYDelegate.Invoke(), posX, posY);
+            ChunkDataTransfer.SetContext(context);
+            SceneManager.LoadScene(_sceneName, LoadSceneMode.Additive);
+        }
+        public void LoadAsync(int posX, int posY)
+        {
+            ChunkContext context = new ChunkContext(_sizeXDelegate.Invoke(), _sizeYDelegate.Invoke(), posX, posY);
             ChunkDataTransfer.SetContext(context);
             SceneManager.LoadSceneAsync(_sceneName, LoadSceneMode.Additive);
         }
-        private void Unload(long sceneID)
+        public void Unload(int posX, int posY)
         {
 
         }

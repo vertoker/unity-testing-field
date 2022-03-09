@@ -7,23 +7,28 @@ namespace Game.Demo
     public class EventUpdater : MonoBehaviour
     {
         [SerializeField] private float _time = 0.5f;
-        private SceneLoadManager _manager;
+        private TargetLoader _loader;
         private Coroutine _main;
 
-        private void Start()
+        private void Awake()
         {
-            _manager = GetComponent<SceneLoadManager>();
+            _loader = GetComponent<TargetLoader>();
+        }
+        public void Start()
+        {
             _main = StartCoroutine(Timer());
+        }
+        public void Stop()
+        {
+            StopCoroutine(_main);
         }
 
         private IEnumerator Timer()
         {
-            int counter = 10;
-            while (counter > 0)
+            while (true)
             {
                 yield return new WaitForSeconds(_time);
-                _manager.UpdateChunks();
-                counter--;
+                _loader.UpdateChunks();
             }
         }
     }
