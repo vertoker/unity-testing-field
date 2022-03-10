@@ -27,6 +27,6 @@ public class ChunkInitializer : MonoBehaviour
             _tilemaps[i] = transform.GetChild(i).GetComponent<Tilemap>();
         }
 
-        _generator.Initialize(_context, _tilemaps);
+        _generator.Generate(_context, _tilemaps);
     }
 }

@@ -5,8 +5,16 @@ using UnityEngine;
 
 public class Generator : ScriptableObject
 {
-    public virtual void Initialize(ChunkContext context, Tilemap[] tilemaps)
+    public virtual void Generate(ChunkContext context, Tilemap[] tilemaps)
     {
 
+    }
+
+    public static void SetTiles(TileBase tile, Vector3Int[] positions, Tilemap tilemap)
+    {
+        foreach (var position in positions)
+        {
+            tilemap.SetTile(position, tile);
+        }
     }
 }

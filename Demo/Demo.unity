@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chunksLoadCountX: 1
   _chunksLoadCountY: 1
-  _sizeX: 16
-  _sizeY: 16
+  _sizeX: 64
+  _sizeY: 64
   _loadManager: {fileID: 2115707913}
   _loader: {fileID: 2115707915}

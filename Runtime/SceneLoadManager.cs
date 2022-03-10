@@ -72,13 +72,17 @@ namespace Game.WorldGeneration
                 _scenes.Add(scene.GetHashCode(), scene);
                 _sceneLoaded.Invoke(scene.GetHashCode());
             }
+#if UNITY_EDITOR
             Debug.Log(string.Format("Scene {0} is loaded. Current scenes count: {1}", scene.GetHashCode(), SceneManager.sceneCount));
+#endif
         }
         private void UnloadedScene(Scene scene)
         {
             _scenes.Remove(scene.GetHashCode());
             _sceneUnloaded.Invoke(scene.GetHashCode());
+#if UNITY_EDITOR
             Debug.Log(string.Format("Scene {0} is unloaded. Current scenes count: {1}", scene.GetHashCode(), SceneManager.sceneCount));
+#endif
         }
     }
 }

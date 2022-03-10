@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ea3fd64ae31a044bc86d9a4b64110e, type: 3}
-  m_Name: New Square Generator
+  m_Script: {fileID: 11500000, guid: d0e804f2319c1f94ea995fd45c89f6aa, type: 3}
+  m_Name: New Dungeon Generator
   m_EditorClassIdentifier: 
   _main: {fileID: 11400000, guid: f76cddf8a2b12c948837150eea9e9880, type: 2}
+  _divideIterations: 10
+  _minRoomSize: 3

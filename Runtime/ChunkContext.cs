@@ -15,7 +15,15 @@ public class ChunkContext
 
     public Vector3 GetPosition()
     {
-        return new Vector3(SizeX * PosX, SizeY * PosY, 0);
+        return new Vector3(_sizeX * _posX, _sizeY * _posY, 0);
+    }
+    public Vector2Int GetMinPosition()
+    {
+        return new Vector2Int(-_sizeX / 2, -_sizeY / 2);
+    }
+    public Vector2Int GetMaxPosition()
+    {
+        return new Vector2Int(_sizeX / 2, _sizeY / 2);
     }
 
     public ChunkContext(int sizeX, int sizeY, int posX, int posY)
