@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 
@@ -11,7 +12,14 @@ public class ChunkInitializer : MonoBehaviour
 
     private void OnEnable()
     {
-        _context = ChunkDataTransfer.GetContext();
+        SceneManager.sceneLoaded += LoadedScene;
+    }
+
+    private void LoadedScene(Scene scene, LoadSceneMode sceneMode)
+    {
+        SceneManager.sceneLoaded -= LoadedScene;
+
+        _context = ChunkDataTransfer.GetContext(scene.GetHashCode());
         transform.position = _context.GetPosition();
         _tilemaps = new Tilemap[transform.childCount];
         for (int i = 0; i < _tilemaps.Length; i++)
@@ -20,9 +28,5 @@ public class ChunkInitializer : MonoBehaviour
         }
 
         _generator.Initialize(_context, _tilemaps);
-    }
-    private void OnDisable()
-    {
-        
     }
 }

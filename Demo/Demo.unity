@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 687303930}
+  _loadManager: {fileID: 2115707913}
 --- !u!114 &2115707916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9525154c3d1013a449cf4d30b436851a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceLoad: 5
+  _chunksLoadCountX: 1
+  _chunksLoadCountY: 1
   _sizeX: 16
   _sizeY: 16
   _loadManager: {fileID: 2115707913}
