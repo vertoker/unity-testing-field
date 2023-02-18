@@ -79,12 +79,12 @@ namespace NN.Utils
             var weights = new float[length][,];
             for (int i = 0; i < length; i++)
             {
-                var inputCount = topology[i];
+                var inputCount = topology[i] + 1;
                 var outputCount = topology[i + 1];
 
                 weights[i] = new float[inputCount, outputCount];
 
-                for (int j = 0; j <= inputCount; j++)
+                for (int j = 0; j < inputCount; j++)
                 {
                     for (int k = 0; k < outputCount; k++)
                     {

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Bobby.NN;
 using SystemRandom = System.Random;
 using UnityRandom = UnityEngine.Random;
 
@@ -9,6 +8,10 @@ namespace NN.Core
     public delegate void WeightSet(float value);
     public delegate float WeightGet();
     
+    /// <summary>
+    /// Neural Network Unit
+    /// 
+    /// </summary>
     [Serializable]
     public class NeuralNetwork
     {
@@ -198,6 +201,11 @@ namespace NN.Core
         {
             var length = weights.Length;
             var inputCount = topology[0];
+
+            for (int i = 0; i < inputCount; i++)
+            {
+                inputs[i] = activator.Invoke(inputs[i]);
+            }
             
             for (int outputCounter = 0; outputCounter < length; outputCounter++)
             {
@@ -226,32 +234,90 @@ namespace NN.Core
         }
 
         /// <summary>
-        /// Main method of neural network, but returns data about all neurons in unnormalized form
+        /// Main method of neural network, but returns data about all neurons in unnormalized format
         /// Convert input layer to output layer through Forward Pass
         /// </summary>
+        /// <param name="snapshot">Where neuron data will be saving</param>
         /// <param name="inputs">Input neuron data</param>
         /// <param name="activationType">Activation function type in standard functions</param>
         /// <returns>All neuron layers (without bias)</returns>
-        public float[][] ForwardWithProgress(float[] inputs, ActivationType activationType = ActivationType.Sigmoid)
+        public void ForwardWithSnapshot(NetworkSnapshot snapshot, float[] inputs, ActivationType activationType = ActivationType.Sigmoid)
         {
-            return ForwardWithProgress(inputs, Activations.Get(activationType));
-            
+            ForwardWithSnapshot(snapshot, inputs, Activations.Get(activationType));
         }
         
         /// <summary>
-        /// Main method of neural network, but returns data about all neurons in unnormalized form
+        /// Main method of neural network, but returns data about all neurons in unnormalized format
         /// Convert input layer to output layer through Forward Pass
         /// </summary>
+        /// <param name="snapshot">Where neuron data will be saving</param>
         /// <param name="inputs">Input neuron data</param>
         /// <param name="activator">Activation function, which normalize every neuron for next iteration</param>
         /// <returns>All neuron layers (without bias)</returns>
-        public float[][] ForwardWithProgress(float[] inputs, ActivationCalculate activator)
+        public void ForwardWithSnapshot(NetworkSnapshot snapshot, float[] inputs, ActivationCalculate activator)
         {
             var length = weights.Length;
             var inputCount = topology[0];
             
-            var result = new float[length + 1][];
-            result[0] = inputs;
+            snapshot[0] = inputs;
+            
+            for (int outputCounter = 0; outputCounter < length; outputCounter++)
+            {
+                for (int i = 0; i < inputCount; i++)
+                {
+                    inputs[i] = activator.Invoke(inputs[i]);
+                }
+                
+                var outputCount = topology[outputCounter + 1];
+                var outputs = new float[outputCount];
+                
+                for (int i = 0; i <= inputCount; i++)
+                {
+                    for (int j = 0; j < outputCount; j++)
+                    {
+                        outputs[j] += inputs[i] * weights[outputCounter][i, j];
+                    }
+                }
+                
+                inputCount = outputCount;
+                inputs = outputs;
+                
+                snapshot[outputCounter + 1] = inputs;
+            }
+        }
+
+        /// <summary>
+        /// Main method of neural network, but returns data about all neurons in normalized format
+        /// Convert input layer to output layer through Forward Pass
+        /// </summary>
+        /// <param name="snapshot">Where neuron data will be saving</param>
+        /// <param name="inputs">Input neuron data</param>
+        /// <param name="activationType">Activation function type in standard functions</param>
+        /// <returns>All neuron layers (without bias)</returns>
+        public void ForwardWithSnapshotNormalized(NetworkSnapshot snapshot, float[] inputs, ActivationType activationType = ActivationType.Sigmoid)
+        {
+            ForwardWithSnapshot(snapshot, inputs, Activations.Get(activationType));
+        }
+        
+        /// <summary>
+        /// Main method of neural network, but returns data about all neurons in normalized format
+        /// Convert input layer to output layer through Forward Pass
+        /// </summary>
+        /// <param name="snapshot">Where neuron data will be saving</param>
+        /// <param name="inputs">Input neuron data</param>
+        /// <param name="activator">Activation function, which normalize every neuron for next iteration</param>
+        /// <returns>All neuron layers (without bias)</returns>
+        public void ForwardWithSnapshotNormalized(NetworkSnapshot snapshot, float[] inputs, ActivationCalculate activator)
+        {
+            var length = weights.Length;
+            var inputCount = topology[0];
+            
+            for (int i = 0; i < inputCount; i++)
+            {
+                inputs[i] = activator.Invoke(inputs[i]);
+            }
+            
+            snapshot[0] = inputs;
             
             for (int outputCounter = 0; outputCounter < length; outputCounter++)
             {
@@ -266,19 +332,16 @@ namespace NN.Core
                     }
                 }
                 
-                result[outputCounter + 1] = outputs;
-                
                 inputCount = outputCount;
-
-                for (int i = 0; i < outputCount; i++)
-                {
-                    outputs[i] = activator.Invoke(outputs[i]);
-                }
-
                 inputs = outputs;
+                
+                for (int i = 0; i < inputCount; i++)
+                {
+                    inputs[i] = activator.Invoke(inputs[i]);
+                }
+                
+                snapshot[outputCounter + 1] = inputs;
             }
-            
-            return result;
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 using System;
-using Bobby.NN;
 
 namespace NN.Core
 {
