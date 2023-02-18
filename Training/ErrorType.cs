@@ -1,4 +1,4 @@
-namespace Bobby.NN.Training
+namespace NN.Training
 {
     public enum ErrorType : byte
     {

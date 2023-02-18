@@ -1,6 +1,7 @@
 using System;
+using Bobby.NN;
 
-namespace Bobby.NN
+namespace NN.Core
 {
     public delegate float ActivationCalculate(float value);
     
@@ -27,18 +28,6 @@ namespace Bobby.NN
                 ActivationType.BinaryEndNegativeInclude => BinaryEndNegativeInclude,
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
-        }
-
-        public static float[] NormalizeNeurons(float[] neurons, ActivationType type)
-        {
-            return NormalizeNeurons(neurons, Get(type));
-        }
-        public static float[] NormalizeNeurons(float[] neurons, ActivationCalculate activator)
-        {
-            var length = neurons.Length;
-            for (int i = 0; i < length; i++)
-                neurons[i] = activator.Invoke(neurons[i]);
-            return neurons;
         }
 
         /// <summary>

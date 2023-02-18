@@ -1,6 +1,6 @@
 using System;
 
-namespace Bobby.NN.Training
+namespace NN.Training
 {
     public delegate float ErrorCalculate(float[] output, float[] ideal);
 

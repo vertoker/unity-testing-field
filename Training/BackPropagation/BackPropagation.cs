@@ -1,6 +1,6 @@
-using System;
+using NN.Core;
 
-namespace Bobby.NN.Training.BProp
+namespace NN.Training.BackPropagation
 {
     public static class BackPropagation
     {

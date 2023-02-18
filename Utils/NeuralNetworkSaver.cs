@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using NN.Core;
 
-namespace Bobby.NN.Utils
+namespace NN.Utils
 {
     public static class NeuralNetworkSaver
     {
@@ -50,8 +51,8 @@ namespace Bobby.NN.Utils
             foreach (var t in topology)
                 bytes.AddRange(BitConverter.GetBytes(t));
             foreach (var layer in weights)
-                for (int i = 0; i < layer.GetLength(0); i++)
-                    for (int j = 0; j < layer.GetLength(0); j++)
+                for (int i = 0; i <= layer.GetLength(0); i++)
+                    for (int j = 0; j < layer.GetLength(1); j++)
                         bytes.AddRange(BitConverter.GetBytes(layer[i, j]));
             
             return bytes.ToArray();
@@ -83,7 +84,7 @@ namespace Bobby.NN.Utils
 
                 weights[i] = new float[inputCount, outputCount];
 
-                for (int j = 0; j < inputCount; j++)
+                for (int j = 0; j <= inputCount; j++)
                 {
                     for (int k = 0; k < outputCount; k++)
                     {

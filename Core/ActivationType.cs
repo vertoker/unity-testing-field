@@ -1,4 +1,4 @@
-namespace Bobby.NN
+namespace NN.Core
 {
     public enum ActivationType : byte
     {
