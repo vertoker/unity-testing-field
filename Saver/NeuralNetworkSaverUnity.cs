@@ -4,7 +4,7 @@ using System;
 
 namespace NN.Saver
 {
-    [CreateAssetMenu(fileName = "NN/Neural Network Weights")]
+    [CreateAssetMenu(menuName = "NN/Neural Network Weights", fileName = "NeuralNetworkWeights")]
     public class NeuralNetworkSaverUnity : ScriptableObject
     {
         [SerializeField] private int[] topology;
@@ -14,14 +14,13 @@ namespace NN.Saver
         {
             topology = nn.Topology;
             var length = nn.Weights.Length;
+            layers = new Layer[length]; 
         }
     }
 
     [Serializable]
     public class Layer
     {
-        [SerializeField] private int inputLayer;
-        [SerializeField] private int outputLayer;
         [SerializeField] private float[] layerWeights;
 
         public void Set(int inputLayer, int outputLayer, float[,] weights)

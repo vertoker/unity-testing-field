@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using NN.Core;
 
-namespace NN.Utils
+namespace NN.Saver
 {
     public static class NeuralNetworkSaverSystem
     {
@@ -51,9 +51,8 @@ namespace NN.Utils
             foreach (var t in topology)
                 bytes.AddRange(BitConverter.GetBytes(t));
             foreach (var layer in weights)
-                for (int i = 0; i <= layer.GetLength(0); i++)
-                    for (int j = 0; j < layer.GetLength(1); j++)
-                        bytes.AddRange(BitConverter.GetBytes(layer[i, j]));
+                foreach (var weight in layer)
+                    bytes.AddRange(BitConverter.GetBytes(weight));
             
             return bytes.ToArray();
         }
@@ -76,21 +75,17 @@ namespace NN.Utils
             }
 
             length--;
-            var weights = new float[length][,];
+            var weights = new float[length][];
             for (int i = 0; i < length; i++)
             {
-                var inputCount = topology[i] + 1;
-                var outputCount = topology[i + 1];
+                var count = (topology[i] + 1) * topology[i + 1];
 
-                weights[i] = new float[inputCount, outputCount];
+                weights[i] = new float[count];
 
-                for (int j = 0; j < inputCount; j++)
+                for (int j = 0; j < count; j++)
                 {
-                    for (int k = 0; k < outputCount; k++)
-                    {
-                        weights[i][j, k] = BitConverter.ToSingle(bytes, counter);
-                        counter += 4;
-                    }
+                    weights[i][j] = BitConverter.ToSingle(bytes, counter);
+                    counter += 4;
                 }
             }
 
