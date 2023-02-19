@@ -149,6 +149,25 @@ namespace NN.Core
             for (int i = 0; i < length; i++)
                 weights[i] = new float[GetLayerWeightsCount(i)];
         }
+        public NeuralNetwork(int[] topology, float[] weights)
+        {
+            this.topology = topology;
+
+            var counter = 0;
+            var lengthX = topology.Length;
+            this.weights = new float[lengthX][];
+            
+            for (int i = 0; i < lengthX; i++)
+            {
+                var lengthY = GetLayerWeightsCount(i);
+                this.weights[i] = new float[lengthY];
+                
+                for (int j = 0; j < lengthY; j++)
+                {
+                    this.weights[i][j] = weights[counter++];
+                }
+            }
+        }
         public NeuralNetwork(int[] topology, float[][] weights)
         {
             this.topology = topology;

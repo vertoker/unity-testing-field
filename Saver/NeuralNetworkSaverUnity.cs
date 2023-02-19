@@ -1,58 +1,55 @@
 ﻿using NN.Core;
 using UnityEngine;
 using System;
+using System.Linq;
+using UnityEditor;
+using UnityEngine.Serialization;
 
 namespace NN.Saver
 {
     [CreateAssetMenu(menuName = "NN/Neural Network Weights", fileName = "NeuralNetworkWeights")]
     public class NeuralNetworkSaverUnity : ScriptableObject
     {
-        [SerializeField] private int[] topology;
-        [SerializeField] private Layer[] layers;
+        public int[] editorTopology = { 2, 1 };
+        
+        public int[] topology = { 2, 1 };
+        public float[] weights = { 0f, 0f, 0f };
 
         public void Save(NeuralNetwork nn)
         {
             topology = nn.Topology;
-            var length = nn.Weights.Length;
-            
-            layers = new Layer[length];
-            for (int i = 0; i < length; i++)
-                layers[i].layerWeights = nn.Weights[i];
+            var flattened = 
+            weights = nn.Weights.SelectMany(inner => inner).ToArray();;
         }
 
         public NeuralNetwork Load(bool complementWeights = true)
         {
             if (complementWeights)
                 ComplementWeights();
-            
-            var length = layers.Length;
-            
-            var weights = new float[length][];
-            for (int i = 0; i < length; i++)
-                weights[i] = layers[i].layerWeights;
-            
+
             return new NeuralNetwork(topology, weights);
         }
 
         public void ComplementWeights()
         {
-            var lengthLayersTarget = topology.Length - 1;
-            var lengthLayers = layers.Length;
-            if (lengthLayers < lengthLayersTarget)
-                Array.Resize(ref layers, lengthLayersTarget);
+            var length = 0;
+            var lengthTopology = topology.Length - 1;
+            for (int i = 0; i < lengthTopology; i++)
+                length += (topology[i] + 1) * topology[i + 1];
             
-            for (int i = 0; i < lengthLayersTarget; i++)
-            {
-                var count = (topology[i] + 1) * topology[i + 1];
-                if (layers[i].layerWeights.Length < count)
-                    Array.Resize(ref layers[i].layerWeights, count);
-            }
+            if (weights.Length < length)
+                Array.Resize(ref weights, length);
         }
-    }
 
-    [Serializable]
-    public class Layer
-    {
-        public float[] layerWeights;
+        public void FillEmpty()
+        {
+            var length = 0;
+            var lengthTopology = editorTopology.Length - 1;
+            for (int i = 0; i < lengthTopology; i++)
+                length += (editorTopology[i] + 1) * editorTopology[i + 1];
+            
+            topology = editorTopology;
+            weights = new float[length];
+        }
     }
 }
