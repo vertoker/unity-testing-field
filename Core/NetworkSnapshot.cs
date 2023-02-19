@@ -20,6 +20,8 @@ namespace NN.Core
             set => neurons[layer][row] = value;
         }
 
+        public int LayerCount => neurons.Length;
+
         public NetworkSnapshot(int[] topology)
         {
             var length = topology.Length;

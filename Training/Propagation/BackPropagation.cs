@@ -11,7 +11,7 @@ namespace NN.Training.Propagation
             this.nn = nn;
         }
 
-        public void Backward(NetworkSnapshot ns)
+        public void Backward(NetworkSnapshot ns, float error)
         {
             
         }

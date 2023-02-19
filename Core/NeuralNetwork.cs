@@ -201,11 +201,6 @@ namespace NN.Core
         {
             var length = weights.Length;
             var inputCount = topology[0];
-
-            for (int i = 0; i < inputCount; i++)
-            {
-                inputs[i] = activator.Invoke(inputs[i]);
-            }
             
             for (int outputCounter = 0; outputCounter < length; outputCounter++)
             {
