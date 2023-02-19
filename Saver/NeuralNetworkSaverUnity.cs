@@ -14,27 +14,45 @@ namespace NN.Saver
         {
             topology = nn.Topology;
             var length = nn.Weights.Length;
-            layers = new Layer[length]; 
+            
+            layers = new Layer[length];
+            for (int i = 0; i < length; i++)
+                layers[i].layerWeights = nn.Weights[i];
+        }
+
+        public NeuralNetwork Load(bool complementWeights = true)
+        {
+            if (complementWeights)
+                ComplementWeights();
+            
+            var length = layers.Length;
+            
+            var weights = new float[length][];
+            for (int i = 0; i < length; i++)
+                weights[i] = layers[i].layerWeights;
+            
+            return new NeuralNetwork(topology, weights);
+        }
+
+        public void ComplementWeights()
+        {
+            var lengthLayersTarget = topology.Length - 1;
+            var lengthLayers = layers.Length;
+            if (lengthLayers < lengthLayersTarget)
+                Array.Resize(ref layers, lengthLayersTarget);
+            
+            for (int i = 0; i < lengthLayersTarget; i++)
+            {
+                var count = (topology[i] + 1) * topology[i + 1];
+                if (layers[i].layerWeights.Length < count)
+                    Array.Resize(ref layers[i].layerWeights, count);
+            }
         }
     }
 
     [Serializable]
     public class Layer
     {
-        [SerializeField] private float[] layerWeights;
-
-        public void Set(int inputLayer, int outputLayer, float[,] weights)
-        {
-            layerWeights = new float[inputLayer * outputLayer];
-
-            var counter = 0;
-            for (int x = 0; x < inputLayer; x++)
-            {
-                for (int y = 0; y < outputLayer; y++)
-                {
-                    
-                }
-            }
-        }
+        public float[] layerWeights;
     }
 }

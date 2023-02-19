@@ -1,0 +1,16 @@
+{
+    "name": "NN.Training",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e9ca004a498852249bf10963a7667419"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

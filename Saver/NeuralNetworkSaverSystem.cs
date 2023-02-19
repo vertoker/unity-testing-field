@@ -59,7 +59,7 @@ namespace NN.Saver
 
         public static NeuralNetwork Deserializer(byte[] bytes)
         {
-            return Deserializer(bytes, out var counter);
+            return Deserializer(bytes, out _);
         }
         private static NeuralNetwork Deserializer(byte[] bytes, out int counter)
         {

@@ -1,0 +1,18 @@
+{
+    "name": "NN.Samples.MNIST",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e9ca004a498852249bf10963a7667419",
+        "GUID:3bb9232f239074542914cf433ad2e5e4",
+        "GUID:b3f11ab03e897f547b49d03c30bc6251"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

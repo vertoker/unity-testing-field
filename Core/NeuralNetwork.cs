@@ -186,12 +186,16 @@ namespace NN.Core
                 var outputs = new float[outputCount];
                 var counter = 0;
 
-                for (int i = 0; i <= inputCount; i++)
+                for (int i = 0; i < outputCount; i++)
                 {
-                    for (int j = 0; j < outputCount; j++)
+                    var tempSum = 0f;
+                    
+                    for (int j = 0; j <= inputCount; j++)
                     {
-                        outputs[j] += inputs[i] * weights[outputCounter][counter++];
+                        tempSum += inputs[j] * weights[outputCounter][counter++];
                     }
+                    
+                    outputs[i] = tempSum;
                 }
                 
                 inputCount = outputCount;
@@ -244,12 +248,16 @@ namespace NN.Core
                 var outputs = new float[outputCount];
                 var counter = 0;
                 
-                for (int i = 0; i <= inputCount; i++)
+                for (int i = 0; i < outputCount; i++)
                 {
-                    for (int j = 0; j < outputCount; j++)
+                    var tempSum = 0f;
+                    
+                    for (int j = 0; j <= inputCount; j++)
                     {
-                        outputs[j] += inputs[i] * weights[outputCounter][counter++];
+                        tempSum += inputs[j] * weights[outputCounter][counter++];
                     }
+                    
+                    outputs[i] = tempSum;
                 }
                 
                 inputCount = outputCount;
@@ -296,12 +304,16 @@ namespace NN.Core
                 var outputs = new float[outputCount];
                 var counter = 0;
                 
-                for (int i = 0; i <= inputCount; i++)
+                for (int i = 0; i < outputCount; i++)
                 {
-                    for (int j = 0; j < outputCount; j++)
+                    var tempSum = 0f;
+                    
+                    for (int j = 0; j <= inputCount; j++)
                     {
-                        outputs[j] += inputs[i] * weights[outputCounter][counter++];
+                        tempSum += inputs[j] * weights[outputCounter][counter++];
                     }
+                    
+                    outputs[i] = tempSum;
                 }
                 
                 inputCount = outputCount;
