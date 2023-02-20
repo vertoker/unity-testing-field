@@ -11,7 +11,9 @@ namespace NN.Samples.MNIST.NN
 
         private NeuralNetwork nn;
 
-        private void Start()
+        public NeuralNetwork NN => nn;
+
+        private void Awake()
         {
             nn = saver.Load();
         }

@@ -1,6 +1,5 @@
-using System;
+#if UNITY_EDITOR
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -43,12 +42,28 @@ namespace NN.Saver
             if (attention)
             {
                 EditorGUILayout.LabelField($"If you have data - create backup of it");
-                EditorGUILayout.LabelField($"Are you sure want to fill weights by zero's");
+                EditorGUILayout.LabelField($"Are you sure want to fill weights");
                 
-                if (GUILayout.Button("Yes, Fill weights data by zero's"))
+                if (GUILayout.Button("Yes, Fill weights data by 0's"))
                 {
                     attention = false;
                     data.FillEmpty();
+                    showWeights = new bool[data.editorTopology.Length - 1].ToList();
+                    EditorUtility.SetDirty(data);
+                    AssetDatabase.SaveAssets();
+                }
+                if (GUILayout.Button("Yes, Fill weights data by random values from 0 to 1"))
+                {
+                    attention = false;
+                    data.RandomizeWeights(0, 1);
+                    showWeights = new bool[data.editorTopology.Length - 1].ToList();
+                    EditorUtility.SetDirty(data);
+                    AssetDatabase.SaveAssets();
+                }
+                if (GUILayout.Button("Yes, Fill weights data by random values from -1 to 1"))
+                {
+                    attention = false;
+                    data.RandomizeWeights(-1, 1);
                     showWeights = new bool[data.editorTopology.Length - 1].ToList();
                     EditorUtility.SetDirty(data);
                     AssetDatabase.SaveAssets();
@@ -168,3 +183,4 @@ namespace NN.Saver
         }
     }
 }
+#endif

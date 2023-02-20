@@ -7,7 +7,7 @@ namespace NN.Samples.MNIST.UI
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Image), typeof(RectTransform))]
-    public class ImageInteraction : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
+    public class ImageInteraction : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerClickHandler
     {
         public Action OnEnterWhileDown, OnClick;
         private RectTransform self;
@@ -29,6 +29,11 @@ namespace NN.Samples.MNIST.UI
             img.color = color;
         }
         
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (Input.GetMouseButton(0))
+                OnEnterWhileDown?.Invoke();
+        }
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (Input.GetMouseButton(0))

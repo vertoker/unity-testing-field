@@ -310,6 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 12558889}
+  - component: {fileID: 12558890}
   m_Layer: 5
   m_Name: NN Result
   m_TagString: Untagged
@@ -339,6 +340,37 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: -85}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &12558890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12558888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2d05c438c4eeb49a2fa71e51b5f9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 20
+  height: 20
+  provider: {fileID: 1592678349}
+  timeUntilUpdate: 0.5
+  updateAnswer:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 91477258}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &17296523
 GameObject:
   m_ObjectHideFlags: 0
@@ -35613,7 +35645,19 @@ MonoBehaviour:
   pixelsParent: {fileID: 646337343}
   pixelChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 12558890}
+        m_TargetAssemblyTypeName: NN.Samples.MNIST.UI.WeightReceiver, NN.Samples.MNIST
+        m_MethodName: SetPixel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2027448426
 GameObject:
   m_ObjectHideFlags: 0

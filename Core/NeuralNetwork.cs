@@ -154,7 +154,7 @@ namespace NN.Core
             this.topology = topology;
 
             var counter = 0;
-            var lengthX = topology.Length;
+            var lengthX = topology.Length - 1;
             this.weights = new float[lengthX][];
             
             for (int i = 0; i < lengthX; i++)
@@ -209,10 +209,12 @@ namespace NN.Core
                 {
                     var tempSum = 0f;
                     
-                    for (int j = 0; j <= inputCount; j++)
+                    for (int j = 0; j < inputCount; j++)
                     {
                         tempSum += inputs[j] * weights[outputCounter][counter++];
                     }
+                    
+                    tempSum += weights[outputCounter][counter++];
                     
                     outputs[i] = tempSum;
                 }
@@ -271,10 +273,12 @@ namespace NN.Core
                 {
                     var tempSum = 0f;
                     
-                    for (int j = 0; j <= inputCount; j++)
+                    for (int j = 0; j < inputCount; j++)
                     {
                         tempSum += inputs[j] * weights[outputCounter][counter++];
                     }
+                    
+                    tempSum += weights[outputCounter][counter++];
                     
                     outputs[i] = tempSum;
                 }
@@ -327,10 +331,12 @@ namespace NN.Core
                 {
                     var tempSum = 0f;
                     
-                    for (int j = 0; j <= inputCount; j++)
+                    for (int j = 0; j < inputCount; j++)
                     {
                         tempSum += inputs[j] * weights[outputCounter][counter++];
                     }
+                    
+                    tempSum += weights[outputCounter][counter++];
                     
                     outputs[i] = tempSum;
                 }
@@ -532,19 +538,14 @@ namespace NN.Core
         public void ApplyWeightsDelta(float[][] weightsDelta)
         {
             var length = weights.Length;
-            var inputCount = topology[0];
             
             for (int i = 0; i < length; i++)
             {
-                var outputCount = topology[i + 1];
-                var counter = 0;
+                var count = GetLayerWeightsCount(i);
 
-                for (int j = 0; j < inputCount; j++)
+                for (int j = 0; j < count; j++)
                 {
-                    for (int k = 0; k < outputCount; k++)
-                    {
-                        weights[i][counter] += weightsDelta[i][counter++];
-                    }
+                    weights[i][j] += weightsDelta[i][j];
                 }
             }
         }

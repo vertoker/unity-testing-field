@@ -55,13 +55,7 @@ namespace NN.Samples.MNIST.UI
         }
         private void Start()
         {
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    DrawPixel(x, y);
-                }
-            }
+            Clear();
         }
 
         public void Clear()
