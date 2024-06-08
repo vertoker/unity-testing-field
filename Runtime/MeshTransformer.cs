@@ -29,18 +29,30 @@ namespace MeshTransformer
         {
             var originVertices = origin.vertices;
             for (var i = 0; i < originVertices.Length; i++)
-                UpdateVertex(ref originVertices[i]);
+                UpdateVertex3(ref originVertices[i]);
             return originVertices;
         }
 
-        private void UpdateVertex(ref Vector3 vector)
+        private void UpdateVertex1(ref Vector3 vector)
         {
             vector = Vector3.Scale(vector, scale);
-            var rotationMatrix = GetRotationMatrix(rotation);
+            var rotationMatrix = GetRotationMatrix1(rotation);
+            vector = position + rotationMatrix * vector;
+        }
+        private void UpdateVertex2(ref Vector3 vector)
+        {
+            vector = Vector3.Scale(vector, scale);
+            vector = GetRotateVector(vector, rotation);
+            vector = position + vector;
+        }
+        private void UpdateVertex3(ref Vector3 vector)
+        {
+            vector = Vector3.Scale(vector, scale);
+            var rotationMatrix = GetRotationMatrix2(rotation);
             vector = position + rotationMatrix * vector;
         }
 
-        private static Matrix3x3 GetRotationMatrix(Vector3 angles)
+        private static Matrix3x3 GetRotationMatrix1(Vector3 angles)
         {
             angles *= Mathf.Deg2Rad;
             angles = -angles;
@@ -66,9 +78,27 @@ namespace MeshTransformer
             
             return x * y * z;
         }
+        private static Matrix3x3 GetRotationMatrix2(Vector3 angles)
+        {
+            angles *= Mathf.Deg2Rad;
+            angles = -angles;
 
+            float sinX = Mathf.Sin(angles.x), cosX = Mathf.Cos(angles.x);
+            float sinY = Mathf.Sin(angles.y), cosY = Mathf.Cos(angles.y);
+            float sinZ = Mathf.Sin(angles.z), cosZ = Mathf.Cos(angles.z);
+            
+            var result = new Matrix3x3
+            {
+                m00 = cosY * cosZ, m10 = sinX * sinY * cosZ - cosX * sinZ, m20 = cosX * sinY * cosZ + sinX * sinZ,
+                m01 = cosY * sinZ, m11 = sinX * sinY * sinZ + cosX * cosZ, m21 = cosX * sinY * sinZ - sinX * cosZ,
+                m02 =       -sinY, m12 =                      sinX * cosY, m22 =                      cosX * cosY,
+            };
+            
+            return result;
+        }
         private static Vector3 GetRotateVector(Vector3 vector3, Vector3 angles)
         {
+            angles *= Mathf.Deg2Rad;
             // X axis
             var y1 = Mathf.Cos(angles.x) * vector3.y - Mathf.Sin(angles.x) * vector3.z;
             var z1 = Mathf.Sin(angles.x) * vector3.y + Mathf.Cos(angles.x) * vector3.z;
