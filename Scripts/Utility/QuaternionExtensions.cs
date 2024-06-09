@@ -4,6 +4,19 @@ namespace MeshTransformer.Utility
 {
     public static class QuaternionExtensions
     {
+        public static Quaternion NormalizeQuaternion(Vector3 axis, float angle)
+        {
+            var normalizedAxis = axis.normalized;
+            var halfAngle = angle * 0.5f * Mathf.Deg2Rad;
+            
+            return new Quaternion
+            {
+                x = normalizedAxis.x * Mathf.Sin(halfAngle),
+                y = normalizedAxis.y * Mathf.Sin(halfAngle),
+                z = normalizedAxis.z * Mathf.Sin(halfAngle),
+                w = Mathf.Cos(halfAngle)
+            };
+        }
         public static Vector3 RotateVector(Quaternion q, Vector3 v)
         {
             var p = Inverse(q);

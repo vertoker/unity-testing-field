@@ -8,9 +8,9 @@ namespace MeshTransformer
 {
     public class MeshEulerTRS : BaseMeshTransformer
     {
-        [SerializeField] private Vector3 position = new Vector3(0, 0, 0);
-        [SerializeField] private Vector3 rotation = new Vector3(0, 0, 0);
-        [SerializeField] private Vector3 scale = new Vector3(1, 1, 1);
+        [SerializeField] private Vector3 position = Vector3.zero;
+        [SerializeField] private Vector3 rotation = Vector3.zero;
+        [SerializeField] private Vector3 scale = Vector3.one;
         
         protected override void ResetTransform()
         {

@@ -19,21 +19,9 @@ namespace MeshTransformer
 
         protected override void UpdateVertex(ref Vector3 vector)
         {
-            var normalizedAxis = axis.normalized;
-            var halfAngle = angle * 0.5f * Mathf.Deg2Rad;
-            
-            var q = new Quaternion
-            {
-                x = normalizedAxis.x * Mathf.Sin(halfAngle),
-                y = normalizedAxis.y * Mathf.Sin(halfAngle),
-                z = normalizedAxis.z * Mathf.Sin(halfAngle),
-                w = Mathf.Cos(halfAngle)
-            };
-            
+            var q = QuaternionExtensions.NormalizeQuaternion(axis, angle);
             vector = QuaternionExtensions.RotateVector(q, vector);
         }
-        
-        
     }
     
 #if UNITY_EDITOR
