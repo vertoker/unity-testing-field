@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MeshTransformer
+namespace MeshTransformer.Utility
 {
     public struct Matrix3x3
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MeshTransformer
+namespace MeshTransformer.Utility
 {
     public static class EulerAnglesExtensions
     {
