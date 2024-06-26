@@ -283,8 +283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d956705188994034adf10cc317c328ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 5
   spawner: {fileID: 917514851}
+  hitsCount: 0
 --- !u!4 &1316309171
 Transform:
   m_ObjectHideFlags: 0

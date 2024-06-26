@@ -94,6 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bff8be33e3495cae7f6a5c2d95de4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  green: {fileID: 2100000, guid: 9b4002a0fcac859499fd706ad297c6d2, type: 2}
-  red: {fileID: 2100000, guid: 4864e1e4024b27b45b9b1670c5662c9a, type: 2}
+  enableMaterial: {fileID: 2100000, guid: 9b4002a0fcac859499fd706ad297c6d2, type: 2}
+  disableMaterial: {fileID: 2100000, guid: 4864e1e4024b27b45b9b1670c5662c9a, type: 2}
   renderer: {fileID: 6150176467094158901}
