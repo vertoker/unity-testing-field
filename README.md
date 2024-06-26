@@ -1,4 +1,4 @@
-Spatial Hashing
+# Spatial Hashing
 
 ![screenshot.1221.png](screenshot.1221.png)
 
