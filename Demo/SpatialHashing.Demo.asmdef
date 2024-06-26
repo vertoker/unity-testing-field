@@ -1,0 +1,16 @@
+{
+    "name": "SpatialHashing.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1fbd06e9b07f9e24aab6413c7d9b228f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
