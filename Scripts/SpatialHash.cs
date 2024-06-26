@@ -9,21 +9,24 @@ namespace SpatialHashing
 {
     public class SpatialHash<T>
     {
-        public struct Hit {
+        public struct Hit
+        {
             public T Item;
-            public float DistSqr;
+            public float SqrDist;
         }
         
         private struct Entry
         {
             public T Item;
-            public float X, Y, Z;
+            public float PosX;
+            public float PosY;
+            public float PosZ;
 
-            public float GetSqrDist(float xPos, float yPos, float zPos)
+            public float GetSqrDist(float posX, float posY, float posZ)
             {
-                var xDiff = xPos - X;
-                var yDiff = yPos - Y;
-                var zDiff = zPos - Z;
+                var xDiff = posX - PosX;
+                var yDiff = posY - PosY;
+                var zDiff = posZ - PosZ;
                 return xDiff * xDiff + yDiff * yDiff + zDiff * zDiff;
             }
         }
@@ -59,22 +62,24 @@ namespace SpatialHashing
             _enabledLists = new List<List<Entry>>(_space.Length);
         }
         
-        public void Add(T item, float xPos, float yPos, float zPos)
+        public void Add(T item, float posX, float posY, float posZ)
         {
-            var indexHash = IndexPointHash(xPos, yPos, zPos);
+            var indexHash = IndexPointHash(posX, posY, posZ);
             var list = _space[indexHash];
             
-            if (list == null) {
+            if (list == null)
+            {
                 list = PullFromDisabled();
                 _space[indexHash] = list;
                 _enabledLists.Add(list);
             }
             
-            list.Add(new Entry { Item = item, X = xPos, Y = yPos, Z = zPos });
+            list.Add(new Entry { Item = item, PosX = posX, PosY = posY, PosZ = posZ });
         }
         public void Clear()
         {
             Array.Clear(_space, 0, _space.Length);
+            
             foreach (var list in _enabledLists)
             {
                 list.Clear();
@@ -84,29 +89,29 @@ namespace SpatialHashing
         }
 
         #region Search
-        public bool Has(float xPos, float yPos, float zPos, float radius, bool selfIgnore)
+        public bool Has(float posX, float posY, float posZ, float radius, bool selfIgnore)
         {
             var radiusSqr = radius * radius;
             
-            var minCellX = WorldToCell(xPos - radius, _minX, _spaceX);
-            var minCellY = WorldToCell(yPos - radius, _minY, _spaceY);
-            var minCellZ = WorldToCell(zPos - radius, _minZ, _spaceZ);
-            var maxCellX = WorldToCell(xPos + radius, _minX, _spaceX);
-            var maxCellY = WorldToCell(yPos + radius, _minY, _spaceY);
-            var maxCellZ = WorldToCell(zPos + radius, _minZ, _spaceZ);
+            var minCellX = WorldToCell(posX - radius, _minX, _spaceX);
+            var minCellY = WorldToCell(posY - radius, _minY, _spaceY);
+            var minCellZ = WorldToCell(posZ - radius, _minZ, _spaceZ);
+            var maxCellX = WorldToCell(posX + radius, _minX, _spaceX);
+            var maxCellY = WorldToCell(posY + radius, _minY, _spaceY);
+            var maxCellZ = WorldToCell(posZ + radius, _minZ, _spaceZ);
             
-            for (var zCell = minCellZ; zCell <= maxCellZ; zCell++)
+            for (var cellZ = minCellZ; cellZ <= maxCellZ; cellZ++)
             {
-                for (var yCell = minCellY; yCell <= maxCellY; yCell++)
+                for (var cellY = minCellY; cellY <= maxCellY; cellY++)
                 {
-                    for (var xCell = minCellX; xCell <= maxCellX; xCell++)
+                    for (var cellX = minCellX; cellX <= maxCellX; cellX++)
                     {
-                        var list = _space[IndexHash(xCell, yCell, zCell)];
+                        var list = _space[IndexCellHash(cellX, cellY, cellZ)];
                         if (list == null) continue;
                         
                         foreach (var entry in list)
                         {
-                            var distSqr = entry.GetSqrDist(xPos, yPos, zPos);
+                            var distSqr = entry.GetSqrDist(posX, posY, posZ);
                             if (distSqr > radiusSqr) continue;
                             if (distSqr < 1e-4f && selfIgnore) continue;
                                 
@@ -118,40 +123,40 @@ namespace SpatialHashing
             
             return false;
         }
-        public (Hit hit, bool ok) GetOne(float xPos, float yPos, float zPos,
+        public (Hit hit, bool ok) GetOne(float posX, float posY, float posZ,
             float radius, bool selfIgnore)
         {
             var hit = new Hit
             {
                 Item = default,
-                DistSqr = radius * radius
+                SqrDist = radius * radius
             };
             var found = false;
             
-            var minCellX = WorldToCell(xPos - radius, _minX, _spaceX);
-            var minCellY = WorldToCell(yPos - radius, _minY, _spaceY);
-            var minCellZ = WorldToCell(zPos - radius, _minZ, _spaceZ);
-            var maxCellX = WorldToCell(xPos + radius, _minX, _spaceX);
-            var maxCellY = WorldToCell(yPos + radius, _minY, _spaceY);
-            var maxCellZ = WorldToCell(zPos + radius, _minZ, _spaceZ);
+            var minCellX = WorldToCell(posX - radius, _minX, _spaceX);
+            var minCellY = WorldToCell(posY - radius, _minY, _spaceY);
+            var minCellZ = WorldToCell(posZ - radius, _minZ, _spaceZ);
+            var maxCellX = WorldToCell(posX + radius, _minX, _spaceX);
+            var maxCellY = WorldToCell(posY + radius, _minY, _spaceY);
+            var maxCellZ = WorldToCell(posZ + radius, _minZ, _spaceZ);
             
-            for (var zCell = minCellZ; zCell <= maxCellZ; zCell++)
+            for (var cellZ = minCellZ; cellZ <= maxCellZ; cellZ++)
             {
-                for (var yCell = minCellY; yCell <= maxCellY; yCell++)
+                for (var cellY = minCellY; cellY <= maxCellY; cellY++)
                 {
-                    for (var xCell = minCellX; xCell <= maxCellX; xCell++)
+                    for (var cellX = minCellX; cellX <= maxCellX; cellX++)
                     {
-                        var list = _space[IndexHash(xCell, yCell, zCell)];
+                        var list = _space[IndexCellHash(cellX, cellY, cellZ)];
                         if (list == null) continue;
                         
                         foreach (var entry in list)
                         {
-                            var distSqr = entry.GetSqrDist(xPos, yPos, zPos);
-                            if (distSqr > hit.DistSqr) continue;
+                            var distSqr = entry.GetSqrDist(posX, posY, posZ);
+                            if (distSqr > hit.SqrDist) continue;
                             if (distSqr < 1e-4f && selfIgnore) continue;
                             
                             found = true;
-                            hit.DistSqr = distSqr;
+                            hit.SqrDist = distSqr;
                             hit.Item = entry.Item;
                         }
                     }
@@ -160,7 +165,7 @@ namespace SpatialHashing
             
             return (hit, found);
         }
-        public List<Hit> Get(float xPos, float yPos, float zPos, float radius, 
+        public List<Hit> Get(float posX, float posY, float posZ, float radius, 
             bool selfIgnore, List<Hit> result = default)
         {
             if (result == null)
@@ -169,29 +174,29 @@ namespace SpatialHashing
             
             var radiusSqr = radius * radius;
             
-            var minCellX = WorldToCell(xPos - radius, _minX, _spaceX);
-            var minCellY = WorldToCell(yPos - radius, _minY, _spaceY);
-            var minCellZ = WorldToCell(zPos - radius, _minZ, _spaceZ);
-            var maxCellX = WorldToCell(xPos + radius, _minX, _spaceX);
-            var maxCellY = WorldToCell(yPos + radius, _minY, _spaceY);
-            var maxCellZ = WorldToCell(zPos + radius, _minZ, _spaceZ);
+            var minCellX = WorldToCell(posX - radius, _minX, _spaceX);
+            var minCellY = WorldToCell(posY - radius, _minY, _spaceY);
+            var minCellZ = WorldToCell(posZ - radius, _minZ, _spaceZ);
+            var maxCellX = WorldToCell(posX + radius, _minX, _spaceX);
+            var maxCellY = WorldToCell(posY + radius, _minY, _spaceY);
+            var maxCellZ = WorldToCell(posZ + radius, _minZ, _spaceZ);
             
-            for (var zCell = minCellZ; zCell <= maxCellZ; zCell++)
+            for (var cellZ = minCellZ; cellZ <= maxCellZ; cellZ++)
             {
-                for (var yCell = minCellY; yCell <= maxCellY; yCell++)
+                for (var cellY = minCellY; cellY <= maxCellY; cellY++)
                 {
-                    for (var xCell = minCellX; xCell <= maxCellX; xCell++)
+                    for (var cellX = minCellX; cellX <= maxCellX; cellX++)
                     {
-                        var list = _space[IndexHash(xCell, yCell, zCell)];
+                        var list = _space[IndexCellHash(cellX, cellY, cellZ)];
                         if (list == null) continue;
                         
                         foreach (var entry in list)
                         {
-                            var distSqr = entry.GetSqrDist(xPos, yPos, zPos);
+                            var distSqr = entry.GetSqrDist(posX, posY, posZ);
                             if (distSqr > radiusSqr) continue;
                             if (distSqr < 1e-4f && selfIgnore) continue;
                             
-                            result.Add(new Hit { Item = entry.Item, DistSqr = distSqr });
+                            result.Add(new Hit { Item = entry.Item, SqrDist = distSqr });
                         }
                     }
                 }
@@ -206,19 +211,19 @@ namespace SpatialHashing
 
         #region Utils
         /// <summary> Use this for sorting hit results </summary>
-        public static int OnSort(Hit x, Hit y) => x.DistSqr < y.DistSqr ? -1 : 1;
+        public static int OnSort(Hit x, Hit y) => x.SqrDist < y.SqrDist ? -1 : 1;
         
         /// <summary> Custom hash function, use as indexing of space, for world point </summary>
-        public int IndexPointHash(float xPos, float yPos, float zPos) {
-            var xCell = WorldToCell(xPos, _minX, _spaceX);
-            var yCell = WorldToCell(yPos, _minY, _spaceY);
-            var zCell = WorldToCell(zPos, _minZ, _spaceZ);
-            return IndexHash(xCell, yCell, zCell);
+        public int IndexPointHash(float posX, float posY, float posZ) {
+            var cellX = WorldToCell(posX, _minX, _spaceX);
+            var cellY = WorldToCell(posY, _minY, _spaceY);
+            var cellZ = WorldToCell(posZ, _minZ, _spaceZ);
+            return IndexCellHash(cellX, cellY, cellZ);
         }
         
         /// <summary> Custom hash function, use as indexing of space, for cell point </summary>
-        public int IndexHash(int xCell, int yCell, int zCell)
-            => zCell * _spaceX * _spaceY + yCell * _spaceX + xCell;
+        public int IndexCellHash(int cellX, int cellY, int cellZ)
+            => cellZ * _spaceX * _spaceY + cellY * _spaceX + cellX;
         
         private List<Entry> PullFromDisabled()
         {
