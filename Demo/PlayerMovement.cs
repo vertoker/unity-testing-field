@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform parent;
     private SpriteAnimation animator;
 
-    private void Awake()
+    private void Start()
     {
         parent = transform;
         animator = GetComponent<SpriteAnimation>();

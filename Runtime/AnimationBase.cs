@@ -28,7 +28,8 @@ namespace Game.Animation
 
         private void Start()
         {
-            PlayPause = _data.PlayOnStart;
+            if (_data.PlayOnStart)
+                PlayPause = true;
         }
         private void StartAnimation()
         {

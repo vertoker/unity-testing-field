@@ -48,8 +48,10 @@ namespace Game.Animation
                     frame = (int)(timer * data.FPS);
                     if (last != frame)
                     {
+                        //Debug.Log(frame.ToString() + " " + (frame % data.FrameArray.Length).ToString());
                         if (frame > length)
                             frame %= data.FrameArray.Length;
+
                         render.Invoke(frame);
                     }
                 }
