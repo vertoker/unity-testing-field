@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MeshTransformer.Utility
+namespace MeshTransformer
 {
     public static class EulerAnglesExtensions
     {
@@ -9,23 +9,27 @@ namespace MeshTransformer.Utility
             angles *= Mathf.Deg2Rad;
             angles = -angles;
             
+            float sinX = Mathf.Sin(angles.x), cosX = Mathf.Cos(angles.x);
+            float sinY = Mathf.Sin(angles.y), cosY = Mathf.Cos(angles.y);
+            float sinZ = Mathf.Sin(angles.z), cosZ = Mathf.Cos(angles.z);
+            
             var x = new Matrix3x3
             {
-                m00 = 1, m10 =                   0, m20 =                    0,
-                m01 = 0, m11 = Mathf.Cos(angles.x), m21 = -Mathf.Sin(angles.x),
-                m02 = 0, m12 = Mathf.Sin(angles.x), m22 =  Mathf.Cos(angles.x),
+                m00 = 1, m10 =    0, m20 =     0,
+                m01 = 0, m11 = cosX, m21 = -sinX,
+                m02 = 0, m12 = sinX, m22 =  cosX,
             };
             var y = new Matrix3x3
             {
-                m00 =  Mathf.Cos(angles.y), m10 = 0, m20 = Mathf.Sin(angles.y),
-                m01 =                    0, m11 = 1, m21 =                   0,
-                m02 = -Mathf.Sin(angles.y), m12 = 0, m22 = Mathf.Cos(angles.y),
+                m00 =  cosY, m10 = 0, m20 = sinY,
+                m01 =     0, m11 = 1, m21 =    0,
+                m02 = -sinY, m12 = 0, m22 = cosY,
             };
             var z = new Matrix3x3
             {
-                m00 = Mathf.Cos(angles.z), m10 = -Mathf.Sin(angles.z), m20 = 0,
-                m01 = Mathf.Sin(angles.z), m11 =  Mathf.Cos(angles.z), m21 = 0,
-                m02 =                   0, m12 =                    0, m22 = 1,
+                m00 = cosZ, m10 = -sinZ, m20 = 0,
+                m01 = sinZ, m11 =  cosZ, m21 = 0,
+                m02 =    0, m12 =     0, m22 = 1,
             };
             
             return x * y * z;
@@ -51,15 +55,20 @@ namespace MeshTransformer.Utility
         public static Vector3 GetRotateVector(Vector3 vector3, Vector3 angles)
         {
             angles *= Mathf.Deg2Rad;
+            
+            float sinX = Mathf.Sin(angles.x), cosX = Mathf.Cos(angles.x);
+            float sinY = Mathf.Sin(angles.y), cosY = Mathf.Cos(angles.y);
+            float sinZ = Mathf.Sin(angles.z), cosZ = Mathf.Cos(angles.z);
+            
             // X axis
-            var y1 = Mathf.Cos(angles.x) * vector3.y - Mathf.Sin(angles.x) * vector3.z;
-            var z1 = Mathf.Sin(angles.x) * vector3.y + Mathf.Cos(angles.x) * vector3.z;
+            var y1 = cosX * vector3.y - sinX * vector3.z;
+            var z1 = sinX * vector3.y + cosX * vector3.z;
             // Y axis
-            var x1 = Mathf.Cos(angles.z) * vector3.x - Mathf.Sin(angles.z) * y1;
-            var y2 = Mathf.Sin(angles.z) * vector3.x + Mathf.Cos(angles.z) * y1;
+            var x1 = cosZ * vector3.x - sinZ * y1;
+            var y2 = sinZ * vector3.x + cosZ * y1;
             // Z axis
-            var x2 = Mathf.Cos(angles.y) * x1 + Mathf.Sin(angles.y) * z1;
-            var z2 = Mathf.Cos(angles.y) * z1 - Mathf.Sin(angles.y) * x1;
+            var x2 = cosY * x1 + sinY * z1;
+            var z2 = cosY * z1 - sinY * x1;
 
             return new Vector3(x2, y2, z2);
         }

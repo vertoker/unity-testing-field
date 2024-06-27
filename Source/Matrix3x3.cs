@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MeshTransformer.Utility
+namespace MeshTransformer
 {
+    // ReSharper disable once InconsistentNaming
     public struct Matrix3x3
     {
         public float m00, m10, m20;
@@ -85,9 +86,32 @@ namespace MeshTransformer.Utility
         {
             return lhs.GetColumn(0) == rhs.GetColumn(0) && lhs.GetColumn(1) == rhs.GetColumn(1) && lhs.GetColumn(2) == rhs.GetColumn(2) && lhs.GetColumn(3) == rhs.GetColumn(3);
         }
-
         public static bool operator !=(Matrix3x3 lhs, Matrix3x3 rhs) => !(lhs == rhs);
-        
+
+        // https://stackoverflow.com/questions/1646807/quick-and-simple-hash-code-combinations
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hash = 17;
+                hash = hash * 31 + m00.GetHashCode();
+                hash = hash * 31 + m10.GetHashCode();
+                hash = hash * 31 + m20.GetHashCode();
+                hash = hash * 31 + m01.GetHashCode();
+                hash = hash * 31 + m11.GetHashCode();
+                hash = hash * 31 + m21.GetHashCode();
+                hash = hash * 31 + m02.GetHashCode();
+                hash = hash * 31 + m12.GetHashCode();
+                hash = hash * 31 + m22.GetHashCode();
+                return hash;
+            }
+        }
+        public override bool Equals(object obj)
+        {
+            return obj != null
+                   && GetHashCode() == obj.GetHashCode();
+        }
+
         public Vector3 GetColumn(int index)
         {
             return index switch

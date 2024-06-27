@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MeshTransformer.Utility
+namespace MeshTransformer
 {
     public static class QuaternionExtensions
     {

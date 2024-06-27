@@ -1,9 +1,7 @@
-﻿using System;
-using MeshTransformer.Utility;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace MeshTransformer
+namespace MeshTransformer.Demo
 {
     public class MeshQuaternion : BaseMeshTransformer
     {

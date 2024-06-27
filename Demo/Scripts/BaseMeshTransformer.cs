@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+﻿using UnityEditor;
+using UnityEngine;
 
-namespace MeshTransformer
+namespace MeshTransformer.Demo
 {
     [RequireComponent(typeof(MeshFilter))]
     public abstract class BaseMeshTransformer : MonoBehaviour

@@ -1,9 +1,7 @@
-﻿using MeshTransformer.Utility;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace MeshTransformer
+namespace MeshTransformer.Demo
 {
     public class MeshQuaternionTRS : BaseMeshTransformer
     {
