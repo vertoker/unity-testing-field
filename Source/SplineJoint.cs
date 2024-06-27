@@ -1,11 +1,6 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-namespace CustAnim.Splines
+namespace Splines
 {
     [System.Serializable]
     public class SplineJoint

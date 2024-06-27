@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-namespace CustAnim.Splines
+namespace Splines
 {
     public class SplineJoints : MonoBehaviour
     {
@@ -145,8 +142,11 @@ namespace CustAnim.Splines
                         Debug.LogError("You don't save Spline asset, because it's empty");
                         return;
                     }
+
+                    var indexOf = path.IndexOf("Assets", StringComparison.Ordinal);
+                    path = path.Substring(indexOf, path.Length - indexOf);
                     
-                    AssetDatabase.CreateAsset(data, $"Assets{path.Split("Assets".ToCharArray()).Last()}");
+                    AssetDatabase.CreateAsset(data, path);
                 }
                 if (GUILayout.Button("Load Joint"))
                 {
@@ -158,7 +158,10 @@ namespace CustAnim.Splines
                         return;
                     }
                     
-                    var data = AssetDatabase.LoadAssetAtPath<SplineData>($"Assets{path.Split("Assets".ToCharArray()).Last()}");
+                    var indexOf = path.IndexOf("Assets", StringComparison.Ordinal);
+                    path = path.Substring(indexOf, path.Length - indexOf);
+                    
+                    var data = AssetDatabase.LoadAssetAtPath<SplineData>(path);
                     
                     if (data == null)
                     {

@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace CustAnim.Splines
+namespace Splines
 {
     public enum TangentType : byte
     {
