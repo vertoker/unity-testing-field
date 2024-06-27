@@ -13,7 +13,7 @@ namespace CoroutineAnimator
         }
         protected override void Render(int frame)
         {
-            _spriteRenderer.sprite = _data.FrameArray[frame];
+            _spriteRenderer.sprite = data.FrameArray[frame];
         }
     }
 }

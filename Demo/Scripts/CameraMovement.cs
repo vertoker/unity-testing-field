@@ -6,16 +6,16 @@ namespace CoroutineAnimator.Demo
     {
         [SerializeField] private float smoothTime = 0.1f;
         [SerializeField] private Transform target;
-        private Transform parent;
+        private Transform _parent;
 
         public void Awake()
         {
-            parent = transform;
+            _parent = transform;
         }
 
         public void FixedUpdate()
         {
-            parent.localPosition = Vector3.Lerp(parent.localPosition, target.localPosition, smoothTime);
+            _parent.localPosition = Vector3.Lerp(_parent.localPosition, target.localPosition, smoothTime);
         }
     }
 }

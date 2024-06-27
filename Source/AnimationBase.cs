@@ -2,52 +2,52 @@ using UnityEngine;
 
 namespace CoroutineAnimator
 {
-    public class AnimationBase : MonoBehaviour
+    public abstract class AnimationBase : MonoBehaviour
     {
-        [SerializeField] protected AnimationData _data;
-        private Coroutine coroutine;
-        private bool _play = false;
+        [SerializeField] protected AnimationData data;
+        private Coroutine _coroutine;
+        private bool _play;
 
-        public bool PlayPause
+        public bool Play
         {
-            get { return _play; }
+            get => _play;
             set 
             {
                 _play = value;
-                if (_play)
-                    StartAnimation();
-                else
-                    StopAnimation();
+                if (_play) StartAnimation();
+                else StopAnimation();
             }
         }
-        public void SetAnimation(AnimationData data)
+        private bool PlayDelegate() { return _play; }
+
+        public AnimationData Data
         {
-            StopAnimation();
-            _data = data;
+            get => data;
+            set
+            {
+                StopAnimation();
+                data = value;
+            }
         }
 
         private void Start()
         {
-            if (_data.PlayOnStart)
-                PlayPause = true;
+            if (data.PlayOnStart)
+                Play = true;
         }
         private void StartAnimation()
         {
-            if (_data == null)
+            if (data == null)
                 return;
             StopAnimation();
-            coroutine = AnimatorPerformer.StartAnimation(_data, Render, Play);
+            _coroutine = AnimatorPerformer.StartAnimation(data, Render, PlayDelegate);
         }
         private void StopAnimation()
         {
-            if (coroutine != null)
-                AnimatorPerformer.StopAnimation(coroutine);
+            if (_coroutine != null)
+                AnimatorPerformer.StopAnimation(_coroutine);
         }
-        protected virtual void Render(int frame)
-        {
 
-        }
-        private bool Play()
-        { return _play; }
+        protected abstract void Render(int frame);
     }
 }
