@@ -1,9 +1,7 @@
 {
     "name": "InverseKinematic",
     "rootNamespace": "",
-    "references": [
-        "GUID:590f57b46aaa71c49b3d6354357afd88"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
