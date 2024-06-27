@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Calculator.Demo
 {
+    [ExecuteInEditMode]
     public class CalculatorDemo : MonoBehaviour
     {
         [Header("Expression")] 
@@ -13,7 +14,6 @@ namespace Calculator.Demo
         
         private void Update()
         {
-            Debug.Log(1);
             answer = ExpressionCalculator.Calculate(expression);
         }
     }

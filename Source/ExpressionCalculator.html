@@ -1,0 +1,114 @@
+<html lang="en">
+<head>
+    <title>Calculator</title>
+    <script>
+        function calculate() {
+        expression = document.getElementById('expression').value;
+        answer = document.getElementById('answer');
+        if (expression == '') {
+        answer.value = 0;
+    }
+        //expression = expression.replace(':', '/');
+        //expression = expression.replace('\\', '/');
+
+//Temporarity params
+        let length = expression.length;
+        let localNum = "";
+        let power = 0;
+
+//Lists (all return params)
+        let nums = [];
+        let signs = [];
+        let order = [];
+
+//Collect data and write lists
+        for (let i = 0; i < length; i++) {
+        let s = expression[i];
+        let isNum = false;
+        if (s == '+' || s == '-' || s == '*' || s == '/') {
+        signs.push(s);
+        order.push(power);
+    }
+        else if (s == '(') {
+        power = power + 1;
+    }
+        else if (s == ')')
+        power = power - 1;
+        else {
+        localNum = localNum + s;
+        isNum = true;
+    }
+
+        if (!isNum && localNum != "") {
+        nums.push(parseFloat(localNum));
+        localNum = "";
+    }
+    }
+//Checkout on error and other
+        if (localNum != "") {
+        nums.push(parseFloat(localNum));
+    }
+        if (nums.length == 0) {
+        answer.value = 0;
+    }
+
+//Clean numbers and find constants
+        for (let i = 0; i < nums.length; i++) {
+        nums[i] = parseFloat(nums[i]);
+    }
+
+//Calculate
+        let len = signs.length;
+        for (let i = 0; i < len; i++) {
+        let nextID = 0;
+        let signPower = 1;
+        if (signs[0] == '*' || signs[0] == '/') {
+        localPower = 2;
+    }
+        let signOrder = order[0];
+
+        for (let j = 1; j < signs.length; j++) {
+        let localPower = 1;
+        if (signs[j] == '*' || signs[j] == '/') {
+        localPower = 2;
+    }
+        let localOrder = order[j];
+
+        if (signOrder < localOrder || (signOrder == localOrder && signPower < localPower)) {
+        nextID = j;
+        signPower = localPower;
+        signOrder = localOrder;
+    }
+    }
+
+        let num = 0;
+        if (signs[nextID] == '+') {
+        num = nums[nextID] + nums[nextID + 1];
+    }
+        else if (signs[nextID] == '-') {
+        num = nums[nextID] - nums[nextID + 1];
+    }
+        else if (signs[nextID] == '*') {
+        num = nums[nextID] * nums[nextID + 1];
+    }
+        else if (signs[nextID] == '/') {
+        num = nums[nextID] / nums[nextID + 1];
+    }
+        signs.splice(nextID, 1);
+        order.splice(nextID, 1);
+        nums.splice(nextID, 1);
+        nums[nextID] = num;
+    }
+        if (nums.length != 0) {
+        answer.value = nums[0];
+    }
+    }
+
+    </script>
+</head>
+<body>
+<input type="text" id="expression"><br>
+    <input type="text" id="answer"><br>
+        <input type="submit" onclick = "calculate()" value="Calculate"><br>
+</body>
+</html>
