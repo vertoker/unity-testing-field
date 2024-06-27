@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Map2D
+namespace MapSystem2D.Spawn
 {
     /// <summary>
     /// Get closest grid position with random offset

@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Game.Map2D
+namespace MapSystem2D
 {
     public class ShowIfAttribute : PropertyAttribute
     {

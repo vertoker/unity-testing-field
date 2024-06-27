@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using MapSystem2D.Spawn;
+using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.Tilemaps;
-using UnityEngine;
 
-namespace Game.Map2D
+namespace MapSystem2D
 {
     [RequireComponent(typeof(Grid))]
     public class Map : MonoBehaviour

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Map2D
+namespace MapSystem2D.Spawn
 {
     /// <summary>
     /// Base class for get object position

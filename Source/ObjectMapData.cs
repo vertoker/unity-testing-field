@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using MapSystem2D.Spawn;
+using UnityEngine;
 
-namespace Game.Map2D
+namespace MapSystem2D
 {
     [CreateAssetMenu(fileName = "ObjectData", menuName = "Data/Object Data", order = 0)]
     public class ObjectMapData : ScriptableObject

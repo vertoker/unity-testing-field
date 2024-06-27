@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Tilemaps;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-namespace Game.Map2D
+namespace MapSystem2D.Spawn
 {
     public enum BlockID
     {

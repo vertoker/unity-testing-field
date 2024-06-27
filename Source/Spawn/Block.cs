@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-namespace Game.Map2D
+namespace MapSystem2D.Spawn
 {
     [System.Serializable]
     public class Block
