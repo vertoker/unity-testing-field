@@ -1,10 +1,10 @@
 {
-    "name": "CustAnim",
+    "name": "InverseKinematic.Editor",
     "rootNamespace": "",
-    "references": [
-        "GUID:590f57b46aaa71c49b3d6354357afd88"
+    "references": [],
+    "includePlatforms": [
+        "Editor"
     ],
-    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

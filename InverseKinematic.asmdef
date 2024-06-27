@@ -1,10 +1,10 @@
 {
-    "name": "AnimationIK.Editor",
+    "name": "InverseKinematic",
     "rootNamespace": "",
-    "references": [],
-    "includePlatforms": [
-        "Editor"
+    "references": [
+        "GUID:590f57b46aaa71c49b3d6354357afd88"
     ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
