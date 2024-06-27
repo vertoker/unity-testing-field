@@ -9,3 +9,5 @@ Just add script on a object, add mesh and modify vertices like it's a usual unit
 
 # IMPORTANT
 When you save mesh, it rewrites original mesh, so make dublicates and be careful
+
+(09.06.2024)
