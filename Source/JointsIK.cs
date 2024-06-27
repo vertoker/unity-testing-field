@@ -5,81 +5,73 @@ namespace InverseKinematic
     public class JointsIK : MonoBehaviour
     {
         [SerializeField] protected Transform target;
-        [SerializeField] protected bool initializeOnAwake = true;
 
         [Header("Animation Parameters")]
         [SerializeField] protected int iterations = 10;
         [SerializeField] protected float delta = 0.001f;
-
-        [Header("Animation Parameters")]
-        [SerializeField] protected Transform[] joints;
-        [SerializeField] protected float[] bonesLength;
-        [SerializeField] protected Vector3[] positions;
-        [SerializeField] protected int length;
         
-        private float fullLength;
+        private Transform[] _joints;
+        private float[] _bonesLength;
+        private Vector3[] _positions;
+        private int _length;
         
-        private void Awake()
+        private float _fullLength;
+        
+        public void Awake()
         {
-            if (initializeOnAwake)
-                Initialize();
-        }
-        public virtual void Initialize()
-        {
-            fullLength = 0;
-            length = transform.childCount - 1;
-            bonesLength = new float[length];
-            positions = new Vector3[length + 1];
-            joints = new Transform[length + 1];//Inverted
+            _fullLength = 0;
+            _length = transform.childCount - 1;
+            _bonesLength = new float[_length];
+            _positions = new Vector3[_length + 1];
+            _joints = new Transform[_length + 1]; // Inverted
 
-            joints[length] = transform.GetChild(0);
-            for (int i = length - 1; i >= 0; i--)
+            _joints[_length] = transform.GetChild(0);
+            for (var i = _length - 1; i >= 0; i--)
             {
-                joints[i] = transform.GetChild(length - i);
-                bonesLength[i] = (joints[i].position - joints[i + 1].position).magnitude;
-                fullLength += bonesLength[i];
+                _joints[i] = transform.GetChild(_length - i);
+                _bonesLength[i] = (_joints[i].position - _joints[i + 1].position).magnitude;
+                _fullLength += _bonesLength[i];
             }
         }
-
         public void LateUpdate()
         {
-            for (int i = 0; i <= length; i++)
-                positions[i] = joints[i].position;
+            for (var i = 0; i <= _length; i++)
+                _positions[i] = _joints[i].position;
 
             var targetPosition = target.position;
-            if ((targetPosition - joints[0].position).sqrMagnitude >= fullLength * fullLength)
+            if ((targetPosition - _joints[0].position).sqrMagnitude >= _fullLength * _fullLength)
             {
-                var direction = (targetPosition - positions[0]).normalized;
+                var direction = (targetPosition - _positions[0]).normalized;
                 
-                for (int i = 1; i <= length; i++)
+                for (var i = 1; i <= _length; i++)
                 {
-                    positions[i] = positions[i - 1] + direction * bonesLength[i - 1];
+                    _positions[i] = _positions[i - 1] + direction * _bonesLength[i - 1];
                 }
             }
             else
             {
-                for (int iteration = 0; iteration < iterations; iteration++)
+                for (var iteration = 0; iteration < iterations; iteration++)
                 {
-                    positions[length] = targetPosition;
+                    _positions[_length] = targetPosition;
                     
-                    for (int i = length - 1; i > 0; i--)
+                    for (var i = _length - 1; i > 0; i--)
                     {
-                        var direction = (positions[i] - positions[i + 1]).normalized;
-                        positions[i] = positions[i + 1] + direction * bonesLength[i];
+                        var direction = (_positions[i] - _positions[i + 1]).normalized;
+                        _positions[i] = _positions[i + 1] + direction * _bonesLength[i];
                     }
-                    for (int i = 1; i <= length; i++)
+                    for (var i = 1; i <= _length; i++)
                     {
-                        var direction = (positions[i] - positions[i - 1]).normalized;
-                        positions[i] = positions[i - 1] + direction * bonesLength[i - 1];
+                        var direction = (_positions[i] - _positions[i - 1]).normalized;
+                        _positions[i] = _positions[i - 1] + direction * _bonesLength[i - 1];
                     }
                     
-                    if ((targetPosition - positions[length]).sqrMagnitude >= delta * delta)
+                    if ((targetPosition - _positions[_length]).sqrMagnitude >= delta * delta)
                         break;
                 }
             }
             
-            for (int i = 0; i <= length; i++)
-                joints[i].position = positions[i];
+            for (var i = 0; i <= _length; i++)
+                _joints[i].position = _positions[i];
         }
     }
 }

@@ -938,14 +938,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  target: {fileID: 894005073}
   points:
   - {x: 10, y: 5, z: 0}
   - {x: 20, y: 5, z: 0}
   - {x: 20, y: 5, z: 15}
   - {x: 10, y: 5, z: 15}
-  currentTarget: 0
-  initializeOnAwake: 1
-  self: {fileID: 0}
 --- !u!1 &941618865
 GameObject:
   m_ObjectHideFlags: 0
