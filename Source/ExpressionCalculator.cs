@@ -1,15 +1,18 @@
+// Credits
+// Created by vertoker (2021)
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace StringCalculator.Source
+namespace Calculator
 {
     using num = Double;
     using order = Byte;
     using pos = Int16;
 
-    public static class StringCalculator
+    public static class ExpressionCalculator
     {
         #region Const strings
         private const string AllNumsConstants = ".1234567890epi";
@@ -110,7 +113,7 @@ namespace StringCalculator.Source
             expression = expression.Replace('\\', DivisionOperation);
             expression = expression.Replace("**", "^");
 
-            // Temporarity params
+            // Temporarily params
             var length = expression.Length;
             var stringNums = new List<string>();
             var localNum = string.Empty;
@@ -118,7 +121,7 @@ namespace StringCalculator.Source
             pos power = 0;
             pos targetNum = 0;
             order nextError = 0;
-            bool hasNums = false;
+            var hasNums = false;
 
             // Lists (all return params)
             var nums = new List<num>();
@@ -127,7 +130,7 @@ namespace StringCalculator.Source
             var target = new List<pos>();
 
             // Collect data and write lists
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 char s = expression[i];
                 bool isNum = false;
@@ -298,6 +301,7 @@ namespace StringCalculator.Source
                 var num = stringNums[i];
                 localNum = string.Empty;
                 num multiplier = 1;
+                
 
                 if (num.Contains(PI))
                 {
