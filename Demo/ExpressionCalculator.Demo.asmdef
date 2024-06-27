@@ -1,0 +1,16 @@
+{
+    "name": "ExpressionCalculator.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:70d8949fc8fa32242ae337fa0a38a52e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
