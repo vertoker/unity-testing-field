@@ -1,0 +1,16 @@
+{
+    "name": "CoroutineAnimator.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9d2a6510cc04fcb4e8c49668bce3b1b3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

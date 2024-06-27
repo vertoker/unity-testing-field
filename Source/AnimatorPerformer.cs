@@ -9,23 +9,22 @@ namespace CoroutineAnimator
     
     public class AnimatorPerformer : MonoBehaviour
     {
-        public static AnimatorPerformer Instance;
-        private static MonoBehaviour _behaviour;
-
+        [SerializeField] private bool debug;
+        private static AnimatorPerformer _instance;
+        
         private void Awake()
         {
-            Instance = this;
-            _behaviour = this;
+            _instance = this;
         }
 
         public static Coroutine StartAnimation(AnimationData data, Render render, Play play)
         {
             var routine = Animation(data, render, play, GetDeltaTime(data.Realtime));
-            return _behaviour.StartCoroutine(routine);
+            return _instance.StartCoroutine(routine);
         }
         public static void StopAnimation(Coroutine coroutine)
         {
-            _behaviour.StopCoroutine(coroutine);
+            _instance.StopCoroutine(coroutine);
         }
 
         private static DeltaTime GetDeltaTime(bool realtime)
@@ -39,50 +38,29 @@ namespace CoroutineAnimator
         
         private static IEnumerator Animation(AnimationData data, Render render, Play play, DeltaTime deltaTime)
         {
-            int length = data.FrameArray.Length - 1;
-            float timer = 0; int frame = 0;
+            var length = data.FrameArray.Length - 1;
+            var timer = 0f;
+            var frame = 0;
+            
             render.Invoke(frame);
 
             while (frame < length || data.Loop)
             {
                 yield return null;
-                if (play.Invoke())
-                {
-                    timer += deltaTime();
-                    int last = frame;
-                    frame = (int)(timer * data.FPS);
-                    if (last != frame)
-                    {
-                        //Debug.Log(frame.ToString() + " " + (frame % data.FrameArray.Length).ToString());
-                        if (frame > length)
-                            frame %= data.FrameArray.Length;
+                if (!play.Invoke()) continue;
+                timer += deltaTime();
+                
+                var last = frame;
+                frame = (int)(timer * data.FPS);
+                if (last == frame) continue;
+                
+                if (_instance.debug)
+                    Debug.Log(string.Join(" ", data.name, frame, frame % data.FrameArray.Length));
+                
+                if (frame > length)
+                    frame %= data.FrameArray.Length;
 
-                        render.Invoke(frame);
-                    }
-                }
-            }
-        }
-        private static IEnumerator AnimationUnscaled(AnimationData data, Render render, Play play)
-        {
-            int length = data.FrameArray.Length - 1;
-            float timer = 0; int frame = 0;
-            render.Invoke(frame);
-
-            while (frame < length || data.Loop)
-            {
-                yield return null;
-                if (play.Invoke())
-                {
-                    timer += Time.unscaledDeltaTime;
-                    int last = frame;
-                    frame = (int)(timer * data.FPS);
-                    if (last != frame)
-                    {
-                        if (frame > length)
-                            frame %= data.FrameArray.Length;
-                        render.Invoke(frame);
-                    }
-                }
+                render.Invoke(frame);
             }
         }
     }
