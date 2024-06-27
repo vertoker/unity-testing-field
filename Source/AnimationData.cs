@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Animation
+namespace CoroutineAnimator
 {
     [CreateAssetMenu(menuName = "Animator/New Anim", fileName = "Animation", order = 0)]
     public class AnimationData : ScriptableObject

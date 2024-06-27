@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 using UnityEngine;
 
-namespace Game.Animation
+namespace CoroutineAnimator
 {
     public delegate void Render(int frame);
     public delegate bool Play();

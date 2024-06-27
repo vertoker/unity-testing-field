@@ -1,7 +1,7 @@
-﻿using UnityEngine.UI;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-namespace Game.Animation
+namespace CoroutineAnimator
 {
     [RequireComponent(typeof(Image))]
     public class ImageAnimation : AnimationBase

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Animation
+namespace CoroutineAnimator
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteAnimation : AnimationBase

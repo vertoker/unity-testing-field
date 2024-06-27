@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Animation
+namespace CoroutineAnimator
 {
     public class AnimationBase : MonoBehaviour
     {
