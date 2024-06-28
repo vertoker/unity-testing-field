@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Game.SerializationSaver
+namespace SerializationSaver
 {
     public static class SaverStatic
     {

@@ -1,9 +1,7 @@
 using System.Runtime.Serialization;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 
-namespace Game.SerializationSaver
+namespace SerializationSaver.Serializers.Other
 {
     public class Texture2DSerializer : ISerializationSurrogate
     {

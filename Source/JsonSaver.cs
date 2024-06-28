@@ -1,8 +1,7 @@
-using UnityEngine;
 using System.IO;
-using System;
+using UnityEngine;
 
-namespace Game.SerializationSaver
+namespace SerializationSaver
 {
     /// <summary>
     /// Use to save small data (500- objects)

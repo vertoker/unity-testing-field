@@ -1,9 +1,11 @@
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using UnityEngine;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using SerializationSaver.Serializers.Other;
+using SerializationSaver.Serializers.Vectors;
+using UnityEngine;
 
-namespace Game.SerializationSaver
+namespace SerializationSaver
 {
     /// <summary>
     /// Use to save private data

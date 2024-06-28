@@ -1,9 +1,9 @@
+using System;
+using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
-using System.IO;
-using System;
 
-namespace Game.SerializationSaver
+namespace SerializationSaver
 {
     /// <summary>
     /// Use to save big data (1500+ objects)

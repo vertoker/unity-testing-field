@@ -1,25 +1,25 @@
 using System.Runtime.Serialization;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 
-namespace Game.SerializationSaver
+namespace SerializationSaver.Serializers.Other
 {
-    public class Vector3IntSerializer : ISerializationSurrogate
+    public class RectIntSerializer : ISerializationSurrogate
     {
         public void GetObjectData(object obj, SerializationInfo info, StreamingContext context)
         {
-            Vector3Int target = (Vector3Int)obj;
+            RectInt target = (RectInt)obj;
             info.AddValue("x", target.x);
             info.AddValue("y", target.y);
-            info.AddValue("z", target.z);
+            info.AddValue("w", target.width);
+            info.AddValue("h", target.height);
         }
         public object SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
         {
-            Vector3Int target = (Vector3Int)obj;
+            RectInt target = (RectInt)obj;
             target.x = (int)info.GetValue("x", typeof(int));
             target.y = (int)info.GetValue("y", typeof(int));
-            target.z = (int)info.GetValue("z", typeof(int));
+            target.width = (int)info.GetValue("w", typeof(int));
+            target.height = (int)info.GetValue("h", typeof(int));
             return target;
         }
     }
