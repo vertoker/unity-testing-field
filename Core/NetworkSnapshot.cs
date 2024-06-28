@@ -23,7 +23,7 @@ namespace NN.Core
         public int LayerCount => neurons.Length;
 
         public float[] Inputs => neurons[0];
-        public float[] Outputs => neurons[^1];
+        public float[] Outputs => neurons[neurons.Length - 1];
 
         public NetworkSnapshot(int[] topology)
         {

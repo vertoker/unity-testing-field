@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace NN.Core
 {
@@ -58,7 +59,7 @@ namespace NN.Core
         /// </summary>
         public static float Sigmoid(float value)
         {
-            return 1.0f / (1.0f + MathF.Exp(-value));
+            return 1.0f / (1.0f + Mathf.Exp(-value));
         }
         
         /// <summary>
@@ -66,7 +67,7 @@ namespace NN.Core
         /// </summary>
         public static float Hyperbolic(float value)
         {
-            return MathF.Tanh(value);
+            return (float)Math.Tanh(value);
         }
         
         /// <summary>

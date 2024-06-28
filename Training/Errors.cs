@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace NN.Training
 {
@@ -27,7 +28,7 @@ namespace NN.Training
             var sum = 0f;
             var length = output.Length;
             for (int i = 0; i < length; i++)
-                sum += MathF.Pow(ideal[i] - output[i], 2);
+                sum += Mathf.Pow(ideal[i] - output[i], 2);
             return sum / length;
         }
 
@@ -37,7 +38,7 @@ namespace NN.Training
         /// </summary>
         public static float RootMSE(float[] output, float[] ideal)
         {
-            return MathF.Sqrt(MSE(output, ideal));
+            return Mathf.Sqrt(MSE(output, ideal));
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace NN.Training
             var sum = 0f;
             var length = output.Length;
             for (int i = 0; i < length; i++)
-                sum += MathF.Atan(ideal[i] - output[i]);
+                sum += Mathf.Atan(ideal[i] - output[i]);
             return sum / length;
         }
     }

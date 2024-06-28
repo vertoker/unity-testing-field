@@ -79,11 +79,11 @@ namespace NN.Core
         /// <summary>
         /// Output neurons count
         /// </summary>
-        public int OutputNeuronsCount => topology[^1];
+        public int OutputNeuronsCount => topology[topology.Length - 1];
         /// <summary>
         /// Hidden neurons count
         /// </summary>
-        public int HiddenNeuronsCount => topology.Sum() - topology[0] - topology[^1];
+        public int HiddenNeuronsCount => topology.Sum() - topology[0] - topology[topology.Length - 1];
         /// <summary>
         /// Count of all weights
         /// Include biases output weights
@@ -110,7 +110,7 @@ namespace NN.Core
         /// Include bias output weights
         /// Doesn't include bias input weights
         /// </summary>
-        public int OutputWeightsCount => (topology[^2] + 1) * topology[^1];
+        public int OutputWeightsCount => (topology[topology.Length - 2] + 1) * topology[topology.Length - 1];
         /// <summary>
         /// Count all hidden weights
         /// Include biases output weights
