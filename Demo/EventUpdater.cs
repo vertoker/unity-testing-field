@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using Game.WorldGeneration;
 
-namespace Game.Demo
+namespace MapChunkSystem2D.Demo
 {
     public class EventUpdater : MonoBehaviour
     {

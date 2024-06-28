@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-namespace Game.WorldGeneration
+namespace MapChunkSystem2D
 {
     public class SceneLoadManager : DataInitialize
     {

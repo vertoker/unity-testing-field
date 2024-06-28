@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.WorldGeneration
+namespace MapChunkSystem2D
 {
     [RequireComponent(typeof(SceneLoadManager))]
     public class TargetLoader : DataInitialize

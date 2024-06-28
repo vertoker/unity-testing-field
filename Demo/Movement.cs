@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Demo
+namespace MapChunkSystem2D.Demo
 {
     public class Movement : MonoBehaviour
     {

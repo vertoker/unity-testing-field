@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-namespace Game.WorldGeneration
+namespace MapChunkSystem2D.Generators
 {
     [CreateAssetMenu(fileName = "New Square Generator", menuName = "Map/Square")]
     public class SquareGenerator : Generator

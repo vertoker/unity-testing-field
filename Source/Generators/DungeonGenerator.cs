@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-namespace Game.WorldGeneration
+namespace MapChunkSystem2D.Generators
 {
     [CreateAssetMenu(fileName = "New Dungeon Generator", menuName = "Map/Dungeon")]
     public class DungeonGenerator : Generator
