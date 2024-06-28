@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Attributes;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-namespace Game.Pool
+namespace ObjectPooling
 {
-    public class PoolSpawner : MonoBehaviour
+    public class PoolSpawnerUnloaded : MonoBehaviour
     {
         [SerializeField] private PoolData _data;
-        [SerializeField] private Queue<GameObject> pool = new Queue<GameObject>();
-        [SerializeField] private bool _spawnInParent = true;
+        [SerializeField] private Queue<GameObject> _pool = new Queue<GameObject>();
+        [SerializeField] private bool _spawnInParent = false;
         [ShowIf(ActionOnConditionFail.Disable, ConditionOperator.And, nameof(_spawnInParent))]
         [SerializeField] private Transform parent;
+        private readonly UnityEvent _onLoad = new UnityEvent();
 
         private void Start()
         {
@@ -20,10 +22,12 @@ namespace Game.Pool
                 if (parent == null)
                     parent = transform;
             }
+            SceneManager.activeSceneChanged += EnqueueAll;
+            DontDestroyOnLoad(gameObject);
             if (_data.GetObject.activeSelf)
                 _data.GetObject.SetActive(false);
             for (int i = 0; i < _data.GetCapacity; i++)
-                pool.Enqueue(CreateItem());
+                _pool.Enqueue(CreateItem());
         }
 
         /// <summary>
@@ -33,15 +37,12 @@ namespace Game.Pool
         /// <returns></returns>
         public GameObject Dequeue(bool activateItem = true)
         {
-            if (pool.Count == 0)
-                pool.Enqueue(CreateItem());
+            if (_pool.Count == 0)
+                _pool.Enqueue(CreateItem());
+            GameObject item = _pool.Dequeue();
             if (activateItem)
-            {
-                GameObject item = pool.Dequeue();
                 item.SetActive(true);
-                return item;
-            }
-            return pool.Dequeue();
+            return item;
         }
         /// <summary>
         /// Return object and return it back after a while
@@ -62,14 +63,31 @@ namespace Game.Pool
         public void Enqueue(GameObject item)
         {
             item.SetActive(false);
-            pool.Enqueue(item);
+            _pool.Enqueue(item);
+        }
+
+        private void EnqueueAll(Scene past, Scene next)
+        {
+            _onLoad.Invoke();
+        }
+
+        private UnityAction GetDisableOnLoad(GameObject item)
+        {
+            return new UnityAction(() =>
+            {
+                if (!_pool.Contains(item))
+                    Enqueue(item);
+            });
         }
 
         private GameObject CreateItem()
         {
+            GameObject item = Instantiate(_data.GetObject);
+            _onLoad.AddListener(GetDisableOnLoad(item));
+            DontDestroyOnLoad(item);
             if (_spawnInParent)
-                return Instantiate(_data.GetObject, parent);
-            return Instantiate(_data.GetObject);
+                return Instantiate(item, parent);
+            return Instantiate(item);
         }
         private IEnumerator DequeueDestroy(GameObject item, float time)
         {

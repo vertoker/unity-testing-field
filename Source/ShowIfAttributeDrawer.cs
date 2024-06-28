@@ -1,11 +1,11 @@
-﻿using System.Reflection;
-using UnityEditor;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Linq;
+using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
-namespace Game.Attributes
+namespace ObjectPooling
 {
     [CustomPropertyDrawer(typeof(ShowIfAttribute), true)]
     public class ShowIfAttributeDrawer : PropertyDrawer

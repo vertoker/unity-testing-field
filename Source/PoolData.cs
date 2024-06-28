@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Pool
+namespace ObjectPooling
 {
     [CreateAssetMenu(menuName = "Pool/New Pool Data", fileName = "Pool Data", order = 0)]
     public class PoolData : ScriptableObject

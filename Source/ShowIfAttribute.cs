@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Game.Attributes
+namespace ObjectPooling
 {
     public class ShowIfAttribute : PropertyAttribute
     {
