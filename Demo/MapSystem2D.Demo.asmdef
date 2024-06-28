@@ -1,0 +1,16 @@
+{
+    "name": "MapSystem2D.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8af191b199f678a45a4598b904130b8b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
