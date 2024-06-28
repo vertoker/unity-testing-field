@@ -1,8 +1,9 @@
 {
-    "name": "NN.Training",
+    "name": "NNP.Demo.MNIST",
     "rootNamespace": "",
     "references": [
-        "GUID:e9ca004a498852249bf10963a7667419"
+        "GUID:e9ca004a498852249bf10963a7667419",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
