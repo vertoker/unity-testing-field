@@ -1,0 +1,16 @@
+{
+    "name": "MapChunkSystem2D.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0cad5b6eb8c5aa54db09e93cab2756c5"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
