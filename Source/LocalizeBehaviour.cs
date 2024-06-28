@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine;
 
-namespace Game.Localization
+namespace Localization
 {
     public class LocalizeBehaviour : MonoBehaviour
     {

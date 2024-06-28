@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Game.Localization
+namespace Localization
 {
     public enum Language : byte
     {

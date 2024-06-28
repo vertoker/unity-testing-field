@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-namespace Game.Localization
+namespace Localization
 {
     [RequireComponent(typeof(TMP_Text))]
     public class LocalizedTMP_Text : MonoBehaviour, ILocalize
