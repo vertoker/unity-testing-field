@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NN.Training.Propagation
+namespace NeuralNetworkPipeline.Training
 {
     public class GradientDescent
     {

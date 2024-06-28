@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace NN.Saver
+namespace NeuralNetworkPipeline.Saver
 {
     [CustomEditor(typeof(NeuralNetworkSaverUnity))]
     public class WeightsSerializer : Editor

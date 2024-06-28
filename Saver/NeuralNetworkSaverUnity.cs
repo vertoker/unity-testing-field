@@ -1,13 +1,9 @@
-﻿using NN.Core;
-using UnityEngine;
-using System;
+﻿using System;
 using System.Linq;
-using UnityEditor;
-using UnityEngine.Serialization;
-
+using UnityEngine;
 using UnityRandom = UnityEngine.Random;
 
-namespace NN.Saver
+namespace NeuralNetworkPipeline.Saver
 {
     [CreateAssetMenu(menuName = "NN/Neural Network Weights", fileName = "NeuralNetworkWeights")]
     public class NeuralNetworkSaverUnity : ScriptableObject

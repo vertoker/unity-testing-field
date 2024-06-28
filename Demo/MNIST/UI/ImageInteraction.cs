@@ -1,9 +1,9 @@
+using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine;
-using System;
 
-namespace NN.Samples.MNIST.UI
+namespace NeuralNetworkPipeline.Demo.MNIST.UI
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Image), typeof(RectTransform))]

@@ -2,10 +2,10 @@
 /// Date: March 2017
 /// (I modified this script)
 
-using UnityEngine;
 using System;
+using UnityEngine;
 
-namespace Game.NeuralNetworkTools
+namespace NeuralNetworkPipeline.Demo.Standard
 {
     [Serializable]
     public class NeuralLayer

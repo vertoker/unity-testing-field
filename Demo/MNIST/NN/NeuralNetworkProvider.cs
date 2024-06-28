@@ -1,9 +1,7 @@
-using System;
-using NN.Core;
-using NN.Saver;
+using NeuralNetworkPipeline.Saver;
 using UnityEngine;
 
-namespace NN.Samples.MNIST.NN
+namespace NeuralNetworkPipeline.Demo.MNIST
 {
     public class NeuralNetworkProvider : MonoBehaviour
     {

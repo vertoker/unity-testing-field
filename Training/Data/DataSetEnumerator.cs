@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Codice.Client.GameUI.Checkin;
 
-namespace NN.Training.Data
+namespace NeuralNetworkPipeline.Training
 {
     public class DataSetEnumerator : IEnumerator<IDataSet>
     {

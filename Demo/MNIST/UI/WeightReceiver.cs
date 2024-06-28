@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using System.Linq;
-using NN.Core;
-using NN.Samples.MNIST.NN;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NN.Samples.MNIST.UI
+namespace NeuralNetworkPipeline.Demo.MNIST.UI
 {
     public class WeightReceiver : MonoBehaviour
     {

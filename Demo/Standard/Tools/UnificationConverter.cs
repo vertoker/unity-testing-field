@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 using UnityEngine;
 
-namespace Game.NeuralNetworkTools
+namespace NeuralNetworkPipeline.Demo.Standard
 {
     public static class UnificationConverter
     {

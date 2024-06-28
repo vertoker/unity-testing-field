@@ -3,9 +3,8 @@
 /// (I modified this script)
 
 using System;
-using UnityEngine;
 
-namespace Game.NeuralNetworkTools
+namespace NeuralNetworkPipeline.Demo.Standard.Training
 {
     public enum MutationType
     {

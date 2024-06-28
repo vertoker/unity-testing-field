@@ -2,13 +2,11 @@
 /// Date: March 2017
 /// (I modified this script)
 
-using UnityEngine;
-using System.Collections.Generic;
-using System.IO;
 using System;
-using System.Collections;
+using System.IO;
+using NeuralNetworkPipeline.Demo.Standard.Training;
 
-namespace Game.NeuralNetworkTools
+namespace NeuralNetworkPipeline.Demo.Standard
 {
     [Serializable]
     public class NeuralNetwork

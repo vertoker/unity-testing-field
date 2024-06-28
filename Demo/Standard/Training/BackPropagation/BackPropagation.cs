@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-
-namespace Game.NeuralNetworkTools
+namespace NeuralNetworkPipeline.Demo.Standard.Training
 {
     public delegate void CorrectNeuralNetwork(double error);
     public class BackPropagation
@@ -26,7 +23,7 @@ namespace Game.NeuralNetworkTools
             return _neuralNetwork.Process(inputs, out _results);
         }
 
-        public void Correct(double error)//Закончить алгоритм
+        public void Correct(double error)//Р—Р°РєРѕРЅС‡РёС‚СЊ Р°Р»РіРѕСЂРёС‚Рј
         {
             degrease.Reset();
             if (degrease.MoveNext())

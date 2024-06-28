@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
-namespace Game.NeuralNetworkTools
+namespace NeuralNetworkPipeline.Demo.Standard
 {
     public enum ErrorType
     {

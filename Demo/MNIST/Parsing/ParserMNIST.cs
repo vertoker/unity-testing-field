@@ -1,7 +1,4 @@
-using UnityEngine;
-using System.IO;
-
-namespace NN.Samples.MNIST.Parsing
+namespace NeuralNetworkPipeline.Demo.MNIST
 {
     public class ParserMNIST
     {

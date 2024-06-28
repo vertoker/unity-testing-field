@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NN.Core
+namespace NeuralNetworkPipeline
 {
     [Serializable]
     public class NetworkSnapshot

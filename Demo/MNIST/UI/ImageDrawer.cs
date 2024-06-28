@@ -1,10 +1,7 @@
-using UnityEngine.Events;
-using UnityEngine.UI;
 using UnityEngine;
-using System;
-using System.Xml;
+using UnityEngine.Events;
 
-namespace NN.Samples.MNIST.UI
+namespace NeuralNetworkPipeline.Demo.MNIST.UI
 {
     public class ImageDrawer : MonoBehaviour
     {

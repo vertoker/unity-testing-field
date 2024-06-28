@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NN.Core;
 
-namespace NN.Saver
+namespace NeuralNetworkPipeline.Saver
 {
     public static class NeuralNetworkSaverSystem
     {

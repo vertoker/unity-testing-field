@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NN.Training
+namespace NeuralNetworkPipeline.Training
 {
     public delegate float ErrorCalculate(float[] output, float[] ideal);
 

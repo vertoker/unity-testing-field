@@ -1,4 +1,4 @@
-namespace NN.Training
+namespace NeuralNetworkPipeline.Training
 {
     public enum ErrorType : byte
     {

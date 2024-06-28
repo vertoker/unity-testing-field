@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SearchService;
 
-namespace NN.Samples.MNIST.UI
+namespace NeuralNetworkPipeline.Demo.MNIST.UI
 {
     public class ColorSelector : MonoBehaviour
     {

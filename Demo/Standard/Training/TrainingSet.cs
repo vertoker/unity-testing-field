@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.NeuralNetworkTools
+namespace NeuralNetworkPipeline.Demo.Standard.Training
 {
     [CreateAssetMenu(fileName = "Set", menuName = "NeuralNetwork/Training Set", order = 0)]
     public class TrainingSet : ScriptableObject

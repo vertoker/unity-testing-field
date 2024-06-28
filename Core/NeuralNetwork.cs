@@ -3,7 +3,7 @@ using System.Linq;
 using SystemRandom = System.Random;
 using UnityRandom = UnityEngine.Random;
 
-namespace NN.Core
+namespace NeuralNetworkPipeline
 {
     public delegate void WeightSet(float value);
     public delegate float WeightGet();

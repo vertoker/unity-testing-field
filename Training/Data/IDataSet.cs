@@ -1,4 +1,4 @@
-namespace NN.Training.Data
+namespace NeuralNetworkPipeline.Training
 {
     public interface IDataSet
     {

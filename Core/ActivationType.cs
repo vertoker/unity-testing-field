@@ -1,4 +1,4 @@
-namespace NN.Core
+namespace NeuralNetworkPipeline
 {
     public enum ActivationType : byte
     {

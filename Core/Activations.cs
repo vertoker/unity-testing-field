@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NN.Core
+namespace NeuralNetworkPipeline
 {
     public delegate float ActivationCalculate(float value);
     

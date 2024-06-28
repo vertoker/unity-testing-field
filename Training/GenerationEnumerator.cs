@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace NN.Training
+namespace NeuralNetworkPipeline.Training
 {
     public class GenerationEnumerator : IEnumerator<int>
     {

@@ -1,13 +1,9 @@
-using System;
-using NN.Core;
-using NN.Saver;
-using NN.Training;
-using NN.Training.Data;
-using NN.Training.Propagation;
+using NeuralNetworkPipeline.Saver;
+using NeuralNetworkPipeline.Training;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NN.Samples.MNIST.NN
+namespace NeuralNetworkPipeline.Demo.MNIST
 {
     public class BackPropagationController : MonoBehaviour
     {

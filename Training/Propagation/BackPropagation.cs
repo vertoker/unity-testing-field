@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using NN.Core;
-using NN.Training.Data;
-
-namespace NN.Training.Propagation
+namespace NeuralNetworkPipeline.Training
 {
     public class BackPropagation
     {

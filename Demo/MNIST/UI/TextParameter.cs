@@ -1,8 +1,7 @@
-using System;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-namespace NN.Samples.MNIST.UI
+namespace NeuralNetworkPipeline.Demo.MNIST.UI
 {
     [RequireComponent(typeof(TMP_Text))]
     public class TextParameter : MonoBehaviour
